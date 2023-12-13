@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1017462574047",
+    "project_id": "kgiantmobile",
+    "storage_bucket": "kgiantmobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017462574047:android:036b42e331c6cdab25526a",
+        "android_client_info": {
+          "package_name": "com.example.kgiantmobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACcGwwnkjtCeaB5DRhJG7DkQvr2z7Wftk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
