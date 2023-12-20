@@ -32,4 +32,8 @@ class KTexts {
   static const String newPassword = '새 비밀번호';
   static const String userName = '아이디';
   static const String phoneNo = '휴대전화번호';
+
+  // -- Home
+  static const String homeAppbarTitle = '반갑습니다.';
+  static const String homeAppbarSubTitle = '케이언트 모바일에 오신걸 환영합니다.';
 }
