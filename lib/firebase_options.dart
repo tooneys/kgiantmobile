@@ -25,7 +25,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -67,15 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1017462574047',
     projectId: 'kgiantmobile',
     storageBucket: 'kgiantmobile.appspot.com',
+    androidClientId: '1017462574047-5ug9913hlgl6v5kufqlv3smgbqfu7dis.apps.googleusercontent.com',
+    iosClientId: '1017462574047-qks8s39886ehahm9dl8e0arkffeh2ee1.apps.googleusercontent.com',
     iosBundleId: 'com.example.kgiantmobile',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCvw1cbX97dKhySg-UVjNW4WiF5TmbSy_8',
-    appId: '1:1017462574047:ios:ae36341685dcc0ec25526a',
-    messagingSenderId: '1017462574047',
-    projectId: 'kgiantmobile',
-    storageBucket: 'kgiantmobile.appspot.com',
-    iosBundleId: 'com.example.kgiantmobile.RunnerTests',
   );
 }

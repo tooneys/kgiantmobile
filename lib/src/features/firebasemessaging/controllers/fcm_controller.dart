@@ -13,13 +13,13 @@ class AppController extends GetxController {
 
   Future<bool> initialize() async {
     // Firebase 초기화부터 해야 Firebase Messaging 을 사용할 수 있다.
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    // await Firebase.initializeApp(
+    //   options: DefaultFirebaseOptions.currentPlatform,
+    // );
 
     // Token 생성
-    // String? token = await FirebaseMessaging.instance.getToken();
-    // debugPrint("Device Token : $token");
+    String? token = await FirebaseMessaging.instance.getToken();
+    debugPrint("Device Token : $token");
 
     // Android 에서는 별도의 확인 없이 리턴되지만, requestPermission()을 호출하지 않으면 수신되지 않는다.
     await FirebaseMessaging.instance.requestPermission(

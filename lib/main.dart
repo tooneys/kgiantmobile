@@ -1,11 +1,37 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'package:kgiantmobile/src/features/authentication/screens/splash_screen/splash_screen.dart';
-import 'package:kgiantmobile/src/features/firebasemessaging/screens/fcm_screen.dart';
-import 'package:kgiantmobile/src/utils/theme.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:kgiantmobile/src/binding/general_binding.dart';
+import 'package:kgiantmobile/src/data/repositories/authentication/auth_repository.dart';
+import 'package:kgiantmobile/src/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:kgiantmobile/src/utils/constants/colors.dart';
+import 'package:kgiantmobile/src/utils/theme/theme.dart';
+
+import 'firebase_options.dart';
 
 // main.dart
-void main() => runApp(const MyApp());
+Future<void> main() async {
+  // Todo: Add Widget binding
+  final WidgetsBinding widgetsBinding =
+      WidgetsFlutterBinding.ensureInitialized();
+
+  // Todo : Init Local Storage
+  await GetStorage.init();
+
+  // Todo : Await Splash until other items Load
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  // Todo: Firebase 초기화
+  // Firebase 초기화 부터 해야 Firebase Messaging 을 사용할 수 있다.
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then(
+    (FirebaseApp value) => Get.put(AuthenticationRepository()),
+  );
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,12 +40,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'KgiantMobile',
-      theme: TAppTheme.lightTheme,
-      darkTheme: TAppTheme.darkTheme,
+      theme: KAppTheme.lightTheme,
+      darkTheme: KAppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      locale: Get.deviceLocale,
       debugShowCheckedModeBanner: false,
-      home: App(),
+      initialBinding: GeneralBindings(),
+      home: const Scaffold(
+        backgroundColor: KColors.primary,
+        body: Center(
+          child: CircularProgressIndicator(
+            color: Colors.white,
+          ),
+        ),
+      ),
     );
   }
 }
