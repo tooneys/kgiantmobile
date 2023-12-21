@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:kgiantmobile/src/features/insight/screens/home.dart';
+import 'package:kgiantmobile/src/features/insight/screens/favorite/favorite.dart';
+import 'package:kgiantmobile/src/features/insight/screens/home/home.dart';
+import 'package:kgiantmobile/src/features/userprofile/screens/settings/settings.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
 
@@ -25,7 +27,7 @@ class NavigationMenu extends StatelessWidget {
           indicatorColor: darkMode
               ? KColors.white.withOpacity(0.1)
               : KColors.black.withOpacity(0.1),
-          destinations: [
+          destinations: const [
             NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
             NavigationDestination(icon: Icon(Iconsax.shop), label: 'Store'),
             NavigationDestination(icon: Icon(Iconsax.heart), label: 'Wishlist'),
@@ -42,15 +44,11 @@ class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
 
   final screens = [
-    HomeScreen(),
+    const HomeScreen(),
     Container(
       color: Colors.blue,
     ),
-    Container(
-      color: Colors.yellow,
-    ),
-    Container(
-      color: Colors.orange,
-    ),
+    const FavoriteScreen(),
+    const SettingScreen(),
   ];
 }

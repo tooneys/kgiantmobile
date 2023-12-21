@@ -3,6 +3,7 @@ class KValidator {
     if (value == null || value.isEmpty) {
       return '$fieldName을 입력해 주세요.';
     }
+    return null;
   }
 
   static String? validateEmail(String? value) {

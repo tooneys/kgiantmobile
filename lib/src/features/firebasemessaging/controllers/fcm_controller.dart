@@ -1,9 +1,7 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:kgiantmobile/firebase_options.dart';
 import 'package:kgiantmobile/src/features/firebasemessaging/screens/notification_screen.dart';
 
 class AppController extends GetxController {
@@ -65,7 +63,7 @@ class AppController extends GetxController {
     void onDidReceiveLocalNotification(
         int id, String? title, String? body, String? payload) async {
       // display a dialog with the notification details, tap ok to go to another page
-      Get.to(() => NotificationDetailsPage(), arguments: payload);
+      Get.to(() => const NotificationDetailsPage(), arguments: payload);
     }
 
     final DarwinInitializationSettings initializationSettingsIos =
@@ -78,7 +76,7 @@ class AppController extends GetxController {
       if (notificationResponse.payload != null) {
         debugPrint('notification payload: $payload');
       }
-      Get.to(() => NotificationDetailsPage(), arguments: payload);
+      Get.to(() => const NotificationDetailsPage(), arguments: payload);
     }
 
     // FlutterLocalNotificationsPlugin 초기화. 이 부분은 notification icon 부분에서 다시 다룬다.
@@ -115,14 +113,14 @@ class AppController extends GetxController {
 
     // Background 상태. Notification 서랍에서 메시지 터치하여 앱으로 돌아왔을 때의 동작은 여기서.
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage rm) {
-      Get.to(() => NotificationDetailsPage(), arguments: rm.data['argument']);
+      Get.to(() => const NotificationDetailsPage(), arguments: rm.data['argument']);
     });
 
     // Terminated 상태에서 도착한 메시지에 대한 처리
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
-      Get.to(() => NotificationDetailsPage(),
+      Get.to(() => const NotificationDetailsPage(),
           arguments: initialMessage.data['argument']);
     }
 

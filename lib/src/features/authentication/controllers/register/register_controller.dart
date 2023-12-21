@@ -4,7 +4,6 @@ import 'package:kgiantmobile/src/data/repositories/authentication/auth_repositor
 import 'package:kgiantmobile/src/data/repositories/user/user_repository.dart';
 import 'package:kgiantmobile/src/features/authentication/models/user_model.dart';
 import 'package:kgiantmobile/src/features/authentication/screens/register/verify_email.dart';
-import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/network_manager/network_manager.dart';
 import 'package:kgiantmobile/src/utils/popups/full_screen_loader.dart';
 import 'package:kgiantmobile/src/utils/popups/loaders.dart';

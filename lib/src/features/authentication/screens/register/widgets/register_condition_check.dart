@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:kgiantmobile/src/features/authentication/controllers/register/register_controller.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';

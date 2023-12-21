@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 
 class SocialButtons extends StatelessWidget {

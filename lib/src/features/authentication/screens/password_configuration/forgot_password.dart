@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:kgiantmobile/src/features/authentication/screens/login/login.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 
 import 'reset_password.dart';
@@ -40,7 +39,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Get.to(() => ResetPasswordScreen()),
+                onPressed: () => Get.to(() => const ResetPasswordScreen()),
                 child: const Text('Submit'),
               ),
             ),

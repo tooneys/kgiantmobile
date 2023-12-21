@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
-import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 
 class FormDivider extends StatelessWidget {
   const FormDivider({

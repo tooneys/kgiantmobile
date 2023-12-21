@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kgiantmobile/src/binding/general_binding.dart';
 import 'package:kgiantmobile/src/data/repositories/authentication/auth_repository.dart';
-import 'package:kgiantmobile/src/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/theme/theme.dart';
 

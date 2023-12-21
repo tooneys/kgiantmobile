@@ -16,26 +16,21 @@ class KPrimaryHeaderContainer extends StatelessWidget {
     return KCurvedEdgeWidget(
       child: Container(
         color: KColors.primary,
-        padding: const EdgeInsets.all(0),
-        child: SizedBox(
-          width: double.infinity,
-          height: 400,
-          child: Stack(
-            children: [
-              Positioned(
-                top: -150,
-                right: -250,
+        child: Stack(
+          children: [
+            Positioned(
+              top: -150,
+              right: -250,
+              child: CircleContainer(
+                  backgroundColor: KColors.white.withOpacity(0.1)),
+            ),
+            Positioned(
+                top: 100,
+                right: -300,
                 child: CircleContainer(
-                    backgroundColor: KColors.white.withOpacity(0.1)),
-              ),
-              Positioned(
-                  top: 100,
-                  right: -300,
-                  child: CircleContainer(
-                      backgroundColor: KColors.white.withOpacity(0.1))),
-              child,
-            ],
-          ),
+                    backgroundColor: KColors.white.withOpacity(0.1))),
+            child,
+          ],
         ),
       ),
     );
