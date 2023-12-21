@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
-import 'package:kgiantmobile/src/utils/device/device_utility.dart';
-import 'package:lottie/lottie.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class KAnimationLoaderWidget extends StatelessWidget {
   const KAnimationLoaderWidget({
