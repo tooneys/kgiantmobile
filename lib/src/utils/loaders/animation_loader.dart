@@ -3,6 +3,7 @@ import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 import 'package:kgiantmobile/src/utils/device/device_utility.dart';
 import 'package:lottie/lottie.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class KAnimationLoaderWidget extends StatelessWidget {
   const KAnimationLoaderWidget({
@@ -25,7 +26,12 @@ class KAnimationLoaderWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset(animation, width: DeviceUtil.getScreenWidth() * 0.8),
+          const CircularProgressIndicator(),
+          // Lottie.asset(
+          //   animation,
+          //   width: DeviceUtil.getScreenWidth() * 0.8,
+          //   height: DeviceUtil.getScreenHeight() * 0.5,
+          // ),
           const SizedBox(height: KSizes.defaultSpace),
           Text(
             text,

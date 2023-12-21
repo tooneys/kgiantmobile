@@ -9,12 +9,8 @@ class KFullScreenLoader {
     showDialog(
       context: Get.overlayContext!,
       barrierDismissible: false,
-      builder: (_) => WillPopScope(
-        onWillPop: () async {
-          // Your custom logic here
-          // Return true to allow back navigation, or false to prevent it.
-          return false;
-        },
+      builder: (_) => PopScope(
+        canPop: false,
         child: Container(
           color: KHelperFunctions.isDarkMode(Get.context!)
               ? KColors.dark
@@ -26,32 +22,11 @@ class KFullScreenLoader {
               const SizedBox(
                 height: 250,
               ),
-              KAnimationLoaderWidget(text: text, animation: animation),
+              KAnimationLoaderWidget(text: text, animation: animation, showAction: true,),
             ],
           ),
         ),
       ),
-
-
-      //
-      //     PopScope(
-      //   canPop: false,
-      //   child: Container(
-      //     color: KHelperFunctions.isDarkMode(Get.context!)
-      //         ? KColors.dark
-      //         : KColors.white,
-      //     width: double.infinity,
-      //     height: double.infinity,
-      //     child: Column(
-      //       children: [
-      //         const SizedBox(
-      //           height: 250,
-      //         ),
-      //         KAnimationLoaderWidget(text: text, animation: animation),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 
