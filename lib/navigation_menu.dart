@@ -28,10 +28,9 @@ class NavigationMenu extends StatelessWidget {
               ? KColors.white.withOpacity(0.1)
               : KColors.black.withOpacity(0.1),
           destinations: const [
-            NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
-            NavigationDestination(icon: Icon(Iconsax.shop), label: 'Store'),
-            NavigationDestination(icon: Icon(Iconsax.heart), label: 'Wishlist'),
-            NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
+            NavigationDestination(icon: Icon(Iconsax.home), label: '홈'),
+            NavigationDestination(icon: Icon(Iconsax.heart), label: '즐겨찾기'),
+            NavigationDestination(icon: Icon(Iconsax.user), label: '사용자'),
           ],
         ),
       ),
@@ -45,9 +44,6 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
-    Container(
-      color: Colors.blue,
-    ),
     const FavoriteScreen(),
     const SettingScreen(),
   ];

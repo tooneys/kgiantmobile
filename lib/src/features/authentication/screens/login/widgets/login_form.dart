@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:kgiantmobile/navigation_manu.dart';
+import 'package:kgiantmobile/navigation_menu.dart';
+import 'package:kgiantmobile/src/features/authentication/controllers/login/login_controller.dart';
 import 'package:kgiantmobile/src/features/authentication/screens/password_configuration/forgot_password.dart';
 import 'package:kgiantmobile/src/features/authentication/screens/register/register.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
+import 'package:kgiantmobile/src/utils/validator/validation.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -13,13 +16,17 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     return Form(
+      key: controller.loginFormKey,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: KSizes.spaceBtwSections),
         child: Column(
           children: [
             /// Email
             TextFormField(
+              controller: controller.email,
+              validator: (value) => KValidator.validateEmail(value),
               decoration: const InputDecoration(
                 prefixIcon: Icon(Iconsax.direct_right),
                 labelText: 'E-Mail',
@@ -28,12 +35,22 @@ class LoginForm extends StatelessWidget {
             const SizedBox(height: KSizes.spaceBtwInputFields),
 
             /// Pw
-            TextFormField(
-              obscureText: true,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Iconsax.password_check),
-                labelText: 'Password',
-                suffixIcon: Icon(Iconsax.eye_slash),
+            Obx(
+              () => TextFormField(
+                controller: controller.password,
+                validator: (value) =>
+                    KValidator.validateEmptyText('Password', value),
+                obscureText: controller.hidePassword.value,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Iconsax.password_check),
+                  labelText: 'Password',
+                  suffixIcon: IconButton(
+                      onPressed: () => controller.hidePassword.value =
+                          !controller.hidePassword.value,
+                      icon: Icon(controller.hidePassword.value
+                          ? Iconsax.eye_slash
+                          : Iconsax.eye)),
+                ),
               ),
             ),
             const SizedBox(height: KSizes.spaceBtwInputFields / 2),
@@ -45,7 +62,12 @@ class LoginForm extends StatelessWidget {
                 /// Remember Me
                 Row(
                   children: [
-                    Checkbox(value: true, onChanged: (value) {}),
+                    Obx(
+                      () => Checkbox(
+                          value: controller.rememberMe.value,
+                          onChanged: (value) => controller.rememberMe.value =
+                              !controller.rememberMe.value),
+                    ),
                     const Text('Remember Me'),
                   ],
                 ),
