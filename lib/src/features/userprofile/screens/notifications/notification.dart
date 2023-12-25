@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:kgiantmobile/src/common/widgets/appbar/appbar.dart';
-import 'package:kgiantmobile/src/common/widgets/custom_shape/containers/rounded_container.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 
 import 'widgets/single_notification.dart';
@@ -19,7 +18,7 @@ class NotificationScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(KSizes.defaultSpace),
           child: Column(

@@ -7,7 +7,6 @@ import 'package:kgiantmobile/src/common/widgets/texts/section_heading.dart';
 import 'package:kgiantmobile/src/common/widgets/tile/settings_menu_tile.dart';
 import 'package:kgiantmobile/src/common/widgets/tile/userprofile_tile.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/notifications/notification.dart';
-import 'package:kgiantmobile/src/features/userprofile/screens/notifications/widgets/single_notification.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -43,7 +42,7 @@ class SettingScreen extends StatelessWidget {
                     title: '알림',
                     subTitle: '',
                     icon: Iconsax.notification,
-                    onTap: () => Get.to(() => NotificationScreen()),
+                    onTap: () => Get.to(() => const NotificationScreen()),
                   ),
                   const SizedBox(height: KSizes.spaceBtwSections),
                   SizedBox(

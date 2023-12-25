@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kgiantmobile/navigation_menu.dart';
 import 'package:kgiantmobile/src/features/authentication/controllers/login/login_controller.dart';
