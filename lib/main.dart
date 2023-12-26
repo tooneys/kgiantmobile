@@ -13,8 +13,7 @@ import 'firebase_options.dart';
 // main.dart
 Future<void> main() async {
   // Todo: Add Widget binding
-  final WidgetsBinding widgetsBinding =
-      WidgetsFlutterBinding.ensureInitialized();
+  final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   // Todo : Init Local Storage
   await GetStorage.init();
@@ -24,8 +23,7 @@ Future<void> main() async {
 
   // Todo: Firebase 초기화
   // Firebase 초기화 부터 해야 Firebase Messaging 을 사용할 수 있다.
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then(
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then(
     (FirebaseApp value) => Get.put(AuthenticationRepository()),
   );
 

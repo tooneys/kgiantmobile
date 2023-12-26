@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:kgiantmobile/src/features/firebasemessaging/controllers/fcm_controller.dart';
 import 'package:kgiantmobile/src/features/insight/screens/favorite/favorite.dart';
 import 'package:kgiantmobile/src/features/insight/screens/home/home.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/settings/settings.dart';
@@ -14,6 +15,7 @@ class NavigationMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationController());
     final darkMode = KHelperFunctions.isDarkMode(context);
+    final AppController c = Get.put(AppController());
 
     return Scaffold(
       bottomNavigationBar: Obx(
@@ -34,7 +36,12 @@ class NavigationMenu extends StatelessWidget {
           ],
         ),
       ),
-      body: Obx(() => controller.screens[controller.selectedIndex.value]),
+      body: FutureBuilder<Object>(
+        future: c.initialize(),
+        builder: (context, snapshot) {
+          return Obx(() => controller.screens[controller.selectedIndex.value]);
+        }
+      ),
     );
   }
 }

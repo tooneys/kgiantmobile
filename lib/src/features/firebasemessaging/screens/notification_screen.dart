@@ -4,7 +4,7 @@ import 'package:kgiantmobile/src/features/firebasemessaging/controllers/notifica
 
 class NotificationDetailsPage
     extends GetView<NotificationDetailsPageController> {
-  const NotificationDetailsPage({Key? key}) : super(key: key);
+  const NotificationDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

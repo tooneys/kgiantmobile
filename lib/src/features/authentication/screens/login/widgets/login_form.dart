@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:kgiantmobile/navigation_menu.dart';
 import 'package:kgiantmobile/src/features/authentication/controllers/login/login_controller.dart';
 import 'package:kgiantmobile/src/features/authentication/screens/password_configuration/forgot_password.dart';
 import 'package:kgiantmobile/src/features/authentication/screens/register/register.dart';
@@ -84,7 +83,7 @@ class LoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Get.to(() => const NavigationMenu()),
+                onPressed: () => controller.emailAndPasswordSignIn(),
                 child: const Text('Sign In'),
               ),
             ),

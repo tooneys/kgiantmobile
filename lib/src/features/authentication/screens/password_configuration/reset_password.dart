@@ -1,17 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kgiantmobile/src/features/authentication/controllers/forget_password/forgot_password_controller.dart';
+import 'package:kgiantmobile/src/features/authentication/screens/login/login.dart';
 import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
+import 'package:kgiantmobile/src/utils/constants/text_strings.dart';
 import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   const ResetPasswordScreen({
     super.key,
+    required this.email,
   });
+
+  final String email;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgotPasswordController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -34,35 +41,30 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
               const SizedBox(height: KSizes.spaceBtwSections),
 
-              ///Title & subTitle
-              Text(
-                'Password Reset Email Sent',
-                style: Theme.of(context).textTheme.headlineMedium,
-                textAlign: TextAlign.center,
-              ),
+              ///Email & Title & SubTitle
+              Text(email, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
               const SizedBox(height: KSizes.spaceBtwItems),
-
-              Text(
-                'Your account Securiy is Our Priority!',
-                style: Theme.of(context).textTheme.labelLarge,
-                textAlign: TextAlign.center,
-              ),
+              Text(KTexts.forgotPasswordTitle,
+                  style: Theme.of(context).textTheme.headlineMedium, textAlign: TextAlign.center),
+              const SizedBox(height: KSizes.spaceBtwItems),
+              Text(KTexts.forgotPasswordSubTitle,
+                  style: Theme.of(context).textTheme.labelLarge, textAlign: TextAlign.center),
               const SizedBox(height: KSizes.spaceBtwSections),
 
               ///Buttons
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Done'),
+                  onPressed: () => Get.offAll(() => const LoginScreen()),
+                  child: const Text(KTexts.done),
                 ),
               ),
               const SizedBox(height: KSizes.spaceBtwItems),
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
-                  child: const Text('resend E-mail'),
+                  onPressed: () => controller.resendPasswordResetEmail(email),
+                  child: const Text(KTexts.resendEmail),
                 ),
               ),
             ],

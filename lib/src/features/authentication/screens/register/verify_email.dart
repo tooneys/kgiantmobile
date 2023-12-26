@@ -5,6 +5,7 @@ import 'package:kgiantmobile/src/features/authentication/controllers/register/ve
 import 'package:kgiantmobile/src/features/authentication/screens/login/login.dart';
 import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
+import 'package:kgiantmobile/src/utils/constants/text_strings.dart';
 import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
@@ -43,7 +44,7 @@ class VerifyEmailScreen extends StatelessWidget {
 
               ///Title & subTitle
               Text(
-                'Verify your email address!',
+                '이메일 주소를 확인하세요!',
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
@@ -57,7 +58,7 @@ class VerifyEmailScreen extends StatelessWidget {
               const SizedBox(height: KSizes.spaceBtwItems),
 
               Text(
-                'Confirm Email',
+                '계정 보안을 강화하려면 이메일 주소를 확인하세요!',
                 style: Theme.of(context).textTheme.labelMedium,
                 textAlign: TextAlign.center,
               ),
@@ -76,7 +77,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 width: double.infinity,
                 child: TextButton(
                   onPressed: () => controller.sendEmailVerification(),
-                  child: const Text('Resend E-mail'),
+                  child: const Text(KTexts.resendEmail),
                 ),
               ),
             ],

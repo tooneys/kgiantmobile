@@ -21,8 +21,7 @@ class App extends StatelessWidget {
       body: FutureBuilder(
         future: c.initialize(),
         builder: (context, snapshot) {
-          if (snapshot.hasData &&
-              snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
             return Center(
               child: Obx(
                 () => Column(

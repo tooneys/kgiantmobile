@@ -49,6 +49,9 @@ class RegisterController extends GetxController {
 
       /// privacy policy check
       if (!privacyPolicy.value) {
+        // remove loader
+        KFullScreenLoader.stopLoading();
+
         KLoaders.warningSnackBar(
           title: '개인정보 수집 및 이용',
           message: '개인정보를 수집 및 이용하는데 동의하지 않으셨습니다.',

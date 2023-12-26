@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kgiantmobile/src/utils/formatter/formatter.dart';
 
 class UserModel {
@@ -9,6 +10,7 @@ class UserModel {
   final String email;
   String phoneNumber;
   String profilePicture;
+
   /// company
   String companyCode;
 
@@ -62,18 +64,20 @@ class UserModel {
     };
   }
 
-// factory UserModel.fromSnapShot(
-//     DocumentSnapshot<Map<String, dynamic>> document) {
-//   if (document.data() != null) {
-//     final data = document.data()!;
-//     return UserModel(
-//         id: document.id,
-//         firstName: data['Firstname'] ?? '',
-//         lastName: data['Lastname'] ?? '',
-//         userName: data['Username'] ?? '',
-//         email: data['Email'] ?? '',
-//         phoneNumber: data['PhoneNumber'] ?? '',
-//         profilePicture: data['ProfilePicture'] ?? '');
-//   }
-// }
+  factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+    if (document.data() != null) {
+      final data = document.data()!;
+      return UserModel(
+          id: document.id,
+          firstName: data['Firstname'] ?? '',
+          lastName: data['Lastname'] ?? '',
+          userName: data['Username'] ?? '',
+          email: data['Email'] ?? '',
+          phoneNumber: data['PhoneNumber'] ?? '',
+          profilePicture: data['ProfilePicture'] ?? '',
+          companyCode: data['CompanyCode'] ?? '');
+    } else {
+      return UserModel.empty();
+    }
+  }
 }

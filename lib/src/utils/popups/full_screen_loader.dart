@@ -19,10 +19,8 @@ class KFullScreenLoader {
           height: double.infinity,
           child: Column(
             children: [
-              const SizedBox(
-                height: 250,
-              ),
-              KAnimationLoaderWidget(text: text, animation: animation, showAction: true,),
+              const SizedBox(height: 250),
+              KAnimationLoaderWidget(text: text, animation: animation),
             ],
           ),
         ),

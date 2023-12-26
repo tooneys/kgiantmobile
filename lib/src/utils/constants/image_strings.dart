@@ -34,4 +34,7 @@ class KImage {
   static const IconData stockIcon = Iconsax.house_2;
   static const IconData deliveryIcon = Iconsax.truck_fast;
   static const IconData qualityIcon = Iconsax.cpu_setting;
+
+  /// profile Images
+  static const String user = 'assets/image/user/user.png';
 }

@@ -8,7 +8,7 @@ class KAnimationLoaderWidget extends StatelessWidget {
     required this.text,
     required this.animation,
     this.showAction = false,
-    this.actionText,
+    this.actionText = '',
     this.onActionPressed,
   });
 
@@ -23,7 +23,7 @@ class KAnimationLoaderWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CircularProgressIndicator(),
+          const CircularProgressIndicator(color: KColors.primary, backgroundColor: KColors.light),
           // Lottie.asset(
           //   animation,
           //   width: DeviceUtil.getScreenWidth() * 0.8,

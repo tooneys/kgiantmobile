@@ -38,8 +38,8 @@ class VerifyEmailController extends GetxController {
         Get.off(
           () => VerifiedScreen(
             image: KImage.verifiedImage,
-            title: 'Your account successfully created',
-            subTitle: 'Welcome to K-giant \nYour Account is Created',
+            title: '귀하의 계정이 성공적으로 생성되었습니다.',
+            subTitle: 'K-giant에 오신 것을 환영합니다. \n귀하의 계정이 생성되었습니다',
             onPressed: () => AuthenticationRepository.instance.screenRedirect(),
           ),
         );
@@ -54,8 +54,8 @@ class VerifyEmailController extends GetxController {
       Get.off(
         () => VerifiedScreen(
           image: KImage.verifiedImage,
-          title: 'Your account successfully created',
-          subTitle: 'Welcome to K-giant \nYour Account is Created',
+          title: '귀하의 계정이 성공적으로 생성되었습니다.',
+          subTitle: 'K-giant에 오신 것을 환영합니다. \n귀하의 계정이 생성되었습니다',
           onPressed: () => AuthenticationRepository.instance.screenRedirect(),
         ),
       );

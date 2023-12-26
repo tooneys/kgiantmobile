@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kgiantmobile/src/features/authentication/controllers/login/login_controller.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 
 class SocialButtons extends StatelessWidget {
@@ -8,6 +10,9 @@ class SocialButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final controller = Get.put(LoginController());
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -17,7 +22,7 @@ class SocialButtons extends StatelessWidget {
             borderRadius: BorderRadius.circular(100),
           ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () => controller.googleSignIn(),
             icon: const Icon(
               Icons.g_mobiledata,
             ),

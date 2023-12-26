@@ -6,7 +6,9 @@ import 'package:kgiantmobile/src/common/widgets/custom_shape/containers/primary_
 import 'package:kgiantmobile/src/common/widgets/texts/section_heading.dart';
 import 'package:kgiantmobile/src/common/widgets/tile/settings_menu_tile.dart';
 import 'package:kgiantmobile/src/common/widgets/tile/userprofile_tile.dart';
+import 'package:kgiantmobile/src/features/userprofile/controllers/logout/logout_controller.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/notifications/notification.dart';
+import 'package:kgiantmobile/src/features/userprofile/screens/profile/profile.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -18,13 +20,12 @@ class SettingScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const KPrimaryHeaderContainer(
+            KPrimaryHeaderContainer(
               child: Column(
                 children: [
-                  KAppBar(title: Text('사용자 계정'), actions: []),
-                  KUserProfileTile(
-                      title: 'admin', subTitle: 'admin@k-giant.co.kr'),
-                  SizedBox(height: KSizes.spaceBtwSections),
+                  const KAppBar(title: Text('사용자 계정'), actions: []),
+                  KUserProfileTile(onPressed: () => Get.to(() => const ProfileScreen())),
+                  const SizedBox(height: KSizes.spaceBtwSections),
                 ],
               ),
             ),
@@ -48,7 +49,7 @@ class SettingScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () => Get.put(LogoutController()).SignOut(),
                       child: const Text('로그아웃'),
                     ),
                   ),

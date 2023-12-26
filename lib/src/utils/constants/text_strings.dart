@@ -34,6 +34,15 @@ class KTexts {
   static const String phoneNo = '휴대전화번호';
 
   // -- Home
-  static const String homeAppbarTitle = '반갑습니다.';
-  static const String homeAppbarSubTitle = '케이언트 모바일에 오신걸 환영합니다.';
+  static const String homeAppbarTitle = '케이언트 모바일에 오신걸 환영합니다.';
+  static const String homeAppbarSubTitle = 'K-Giant Mobile';
+
+
+  // Forgot Password
+  static const String done = '완료';
+  static const String submit = '제출';
+  static const String resendEmail = '이메일 재전송';
+  static const String forgotPasswordTitle = '비밀번호 재설정 이메일이 전송되었습니다.';
+  static const String forgotPasswordSubTitle = '귀하의 계정 보안은 우리의 최우선 과제입니다! 안전한 링크를 전송하여 비밀번호를 안전하게 변경하시고 계정을 보호하세요.';
 }
+

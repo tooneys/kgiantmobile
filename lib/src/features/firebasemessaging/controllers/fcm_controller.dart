@@ -2,12 +2,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:kgiantmobile/src/features/firebasemessaging/screens/notification_screen.dart';
 
 class AppController extends GetxController {
   static AppController get to => Get.find();
 
   final Rxn<RemoteMessage> message = Rxn<RemoteMessage>();
+  final localStorage = GetStorage();
 
   Future<bool> initialize() async {
     // Firebase 초기화부터 해야 Firebase Messaging 을 사용할 수 있다.
@@ -17,7 +19,8 @@ class AppController extends GetxController {
 
     // Token 생성
     String? token = await FirebaseMessaging.instance.getToken();
-    debugPrint("Device Token : $token");
+    localStorage.writeIfNull('deviceToken', token);
+    //debugPrint("Device Token : $token");
 
     // Android 에서는 별도의 확인 없이 리턴되지만, requestPermission()을 호출하지 않으면 수신되지 않는다.
     await FirebaseMessaging.instance.requestPermission(
@@ -31,47 +34,39 @@ class AppController extends GetxController {
     );
 
     // iOS foreground에서 heads up display 표시를 위해 alert, sound true로 설정
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
     );
 
     // Android용 새 Notification Channel
-    const AndroidNotificationChannel androidNotificationChannel =
-        AndroidNotificationChannel(
+    const AndroidNotificationChannel androidNotificationChannel = AndroidNotificationChannel(
       'high_importance_channel', // 임의의 id
       'High Importance Notifications', // 설정에 보일 채널명
-      description:
-          'This channel is used for important notifications.', // 설정에 보일 채널 설명
+      description: 'This channel is used for important notifications.', // 설정에 보일 채널 설명
       importance: Importance.max,
     );
 
     // Notification Channel을 디바이스에 생성
-    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
+    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(androidNotificationChannel);
 
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    void onDidReceiveLocalNotification(
-        int id, String? title, String? body, String? payload) async {
+    void onDidReceiveLocalNotification(int id, String? title, String? body, String? payload) async {
       // display a dialog with the notification details, tap ok to go to another page
       Get.to(() => const NotificationDetailsPage(), arguments: payload);
     }
 
     final DarwinInitializationSettings initializationSettingsIos =
-        DarwinInitializationSettings(
-            onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+        DarwinInitializationSettings(onDidReceiveLocalNotification: onDidReceiveLocalNotification);
 
-    void onDidReceiveNotificationResponse(
-        NotificationResponse notificationResponse) async {
+    void onDidReceiveNotificationResponse(NotificationResponse notificationResponse) async {
       final String? payload = notificationResponse.payload;
       if (notificationResponse.payload != null) {
         debugPrint('notification payload: $payload');
@@ -81,9 +76,7 @@ class AppController extends GetxController {
 
     // FlutterLocalNotificationsPlugin 초기화. 이 부분은 notification icon 부분에서 다시 다룬다.
     await flutterLocalNotificationsPlugin.initialize(
-      InitializationSettings(
-          android: initializationSettingsAndroid,
-          iOS: initializationSettingsIos),
+      InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIos),
       onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
     );
 
@@ -101,8 +94,7 @@ class AppController extends GetxController {
             android: AndroidNotificationDetails(
               'high_importance_channel', // 임의의 id
               'High Importance Notifications', // 설정에 보일 채널명
-              channelDescription:
-                  'This is channel is used for important notifications.', // 설정에 보일 채널 설명
+              channelDescription: 'This is channel is used for important notifications.', // 설정에 보일 채널 설명
             ),
           ),
           // 여기서는 간단하게 data 영역의 임의의 필드(ex. argument)를 사용한다.
@@ -117,11 +109,9 @@ class AppController extends GetxController {
     });
 
     // Terminated 상태에서 도착한 메시지에 대한 처리
-    RemoteMessage? initialMessage =
-        await FirebaseMessaging.instance.getInitialMessage();
+    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
-      Get.to(() => const NotificationDetailsPage(),
-          arguments: initialMessage.data['argument']);
+      Get.to(() => const NotificationDetailsPage(), arguments: initialMessage.data['argument']);
     }
 
     return true;
