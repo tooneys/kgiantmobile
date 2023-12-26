@@ -12,4 +12,6 @@ flutter_native_splash:
 
   web: false
 
+  android_gravity: fill
+
   fullscreen: true
