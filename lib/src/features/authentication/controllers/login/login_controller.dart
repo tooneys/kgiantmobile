@@ -22,8 +22,7 @@ class LoginController extends GetxController {
   Future<void> emailAndPasswordSignIn() async {
     try {
       // Start Loading
-      KFullScreenLoader.openLoadingDialog(
-          '잠시만 기다려 주세요...', KImage.loadingAnimation);
+      KFullScreenLoader.openLoadingDialog('잠시만 기다려 주세요...', KImage.loadingAnimation);
 
       // CHeck Internet Connection
       final isConnected = await NetworkManager.instance.isConnected();
@@ -45,8 +44,8 @@ class LoginController extends GetxController {
       }
 
       // login user using Email & password Authentication
-      final userCredentials = await AuthenticationRepository.instance
-          .loginWithEmailAndPassword(email.text.trim(), password.text.trim());
+      final userCredentials =
+          await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
 
       // Remove Loader
       KFullScreenLoader.stopLoading();
@@ -62,8 +61,7 @@ class LoginController extends GetxController {
   Future<void> googleSignIn() async {
     try {
       // Start Loading
-      KFullScreenLoader.openLoadingDialog(
-          '잠시만 기다려 주세요...', KImage.loadingAnimation);
+      KFullScreenLoader.openLoadingDialog('잠시만 기다려 주세요...', KImage.loadingAnimation);
 
       // CHeck Internet Connection
       final isConnected = await NetworkManager.instance.isConnected();
@@ -73,8 +71,7 @@ class LoginController extends GetxController {
       }
 
       // Google Auth
-      final userCredential =
-          await AuthenticationRepository.instance.signInWithGoogle();
+      final userCredential = await AuthenticationRepository.instance.signInWithGoogle();
 
       // Save user Record
       await userController.saveUserRecord(userCredential);
@@ -93,8 +90,11 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
-    email.text = localStorage.read('REMEMBER_ME_EMAIL');
-    password.text = localStorage.read('REMEMBER_ME_PASSWORD');
+    if (localStorage.read('REMEMBER_ME_EMAIL') != null) {
+      email.text = localStorage.read('REMEMBER_ME_EMAIL');
+      password.text = localStorage.read('REMEMBER_ME_PASSWORD');
+    }
+
     super.onInit();
   }
 }
