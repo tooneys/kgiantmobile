@@ -20,7 +20,7 @@ class LogoutController extends GetxController {
       }
 
       // log out
-      final userCredentials = await AuthenticationRepository.instance.logout();
+      await AuthenticationRepository.instance.logout();
 
       // Remove Loader
       KFullScreenLoader.stopLoading();
