@@ -146,8 +146,6 @@ class AuthenticationRepository extends GetxController {
       //trigger the auth flow
       final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
-      debugPrint('$userAccount');
-
       // Obtain the auth details from request
       final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
 

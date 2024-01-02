@@ -10,7 +10,7 @@ class KProfileMenu extends StatelessWidget {
     this.icon = Iconsax.arrow_right_34,
   });
 
-  final IconData icon;
+  final IconData? icon;
   final String title, value;
   final VoidCallback onPressed;
 

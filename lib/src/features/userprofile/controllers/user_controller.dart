@@ -31,8 +31,11 @@ class UserController extends GetxController {
   Future<void> saveUserRecord(UserCredential? userCredential) async {
     try {
       if (userCredential != null) {
+        final isNew = userCredential.additionalUserInfo!.isNewUser;
         final nameParts = UserModel.nameParts(userCredential.user!.displayName ?? '');
         final username = UserModel.generateUsername(userCredential.user!.displayName ?? '');
+
+        if (!isNew) return;
 
         // data
         final user = UserModel(

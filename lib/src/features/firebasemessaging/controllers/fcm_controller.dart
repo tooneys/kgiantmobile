@@ -4,12 +4,14 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kgiantmobile/src/features/firebasemessaging/screens/notification_screen.dart';
+import 'package:kgiantmobile/src/features/userprofile/controllers/notification_controller.dart';
 
 class AppController extends GetxController {
   static AppController get to => Get.find();
 
   final Rxn<RemoteMessage> message = Rxn<RemoteMessage>();
   final localStorage = GetStorage();
+  final notificationController = Get.put(NotificationController());
 
   Future<bool> initialize() async {
     // Firebase 초기화부터 해야 Firebase Messaging 을 사용할 수 있다.
@@ -86,6 +88,15 @@ class AppController extends GetxController {
       AndroidNotification? android = rm.notification?.android;
 
       if (notification != null && android != null) {
+
+        /// local Storage message save
+        notificationController.saveStorage({
+          'title': notification.title,
+          'body': notification.body,
+          'payload': rm.data['argument'],
+        });
+
+        /// push Notification
         flutterLocalNotificationsPlugin.show(
           0,
           notification.title,

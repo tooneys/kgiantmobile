@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:kgiantmobile/src/data/repositories/authentication/auth_repository.dart';
 import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/network_manager/network_manager.dart';
@@ -6,7 +7,11 @@ import 'package:kgiantmobile/src/utils/popups/full_screen_loader.dart';
 import 'package:kgiantmobile/src/utils/popups/loaders.dart';
 
 class LogoutController extends GetxController {
-  Future<void> SignOut() async {
+  static LogoutController get instance => Get.find();
+
+  final storage = GetStorage();
+
+  Future<void> signOut() async {
     try {
       // Start Loading
       KFullScreenLoader.openLoadingDialog(
@@ -18,6 +23,9 @@ class LogoutController extends GetxController {
         KFullScreenLoader.stopLoading();
         return;
       }
+
+      // storage init
+      storage.erase();
 
       // log out
       await AuthenticationRepository.instance.logout();

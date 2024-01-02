@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:kgiantmobile/src/common/widgets/custom_shape/containers/rounded_container.dart';
+import 'package:kgiantmobile/src/features/firebasemessaging/models/notification_model.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
@@ -7,7 +10,10 @@ import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
 class KSingleNotification extends StatelessWidget {
   const KSingleNotification({
     super.key,
+    this.data,
   });
+
+  final String? data;
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +36,18 @@ class KSingleNotification extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: KSizes.ss / 2,),
+            const SizedBox(
+              height: KSizes.ss / 2,
+            ),
             Text(
               'Push Notification body',
               style: Theme.of(context).textTheme.titleLarge,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: KSizes.ss / 2,),
+            const SizedBox(
+              height: KSizes.ss / 2,
+            ),
             Text(
               'Push Notification body',
               style: Theme.of(context).textTheme.titleLarge,

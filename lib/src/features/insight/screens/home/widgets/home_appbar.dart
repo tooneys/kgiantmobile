@@ -27,7 +27,7 @@ class KHomeAppBar extends StatelessWidget {
                 return const KShimmerEffect(width: 80, height: 15);
               } else {
                 return Text(
-                  controller.user.value.fullName,
+                  '${controller.user.value.fullName}님 안녕하세요.',
                   style: Theme.of(context).textTheme.headlineSmall!.apply(
                         color: KColors.white,
                       ),

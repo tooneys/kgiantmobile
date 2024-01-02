@@ -1,6 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kgiantmobile/src/common/widgets/appbar/appbar.dart';
+import 'package:kgiantmobile/src/features/userprofile/controllers/notification_controller.dart';
+import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 
 import 'widgets/single_notification.dart';
@@ -10,6 +12,9 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(NotificationController());
+    final data = controller.readStorage();
+
     return Scaffold(
       appBar: KAppBar(
         showBackArrow: true,
@@ -17,15 +22,24 @@ class NotificationScreen extends StatelessWidget {
           '알림',
           style: Theme.of(context).textTheme.headlineSmall,
         ),
+        actions: [
+          TextButton(
+            onPressed: () => controller.clearStorage(),
+            child: Text(
+              'Clear all',
+              style: Theme.of(context).textTheme.bodyMedium!.apply(color: KColors.primary),
+            ),
+          ),
+        ],
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(KSizes.defaultSpace),
+          padding: const EdgeInsets.all(KSizes.defaultSpace),
           child: Column(
-            children: [
-              KSingleNotification(),
-              KSingleNotification(),
-            ],
+            // children: [
+            //   KSingleNotification(),
+            // ],
+            children: data.map((e) => KSingleNotification(data: e)).toList(),
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kgiantmobile/src/common/widgets/appbar/appbar.dart';
@@ -6,8 +7,11 @@ import 'package:kgiantmobile/src/common/widgets/image_text/circular_image_text.d
 import 'package:kgiantmobile/src/common/widgets/texts/section_heading.dart';
 import 'package:kgiantmobile/src/features/userprofile/controllers/user_controller.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/profile/change_name.dart';
+import 'package:kgiantmobile/src/features/userprofile/screens/profile/change_username.dart';
 import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
+import 'package:kgiantmobile/src/utils/formatter/formatter.dart';
+import 'package:kgiantmobile/src/utils/popups/loaders.dart';
 
 import 'widgets/profile_menu.dart';
 
@@ -44,30 +48,52 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: KSizes.spaceBtwItems),
 
               // Heading profile info
-              KSectionHeading(title: 'Profile Information', onPressed: () {}, showActionButton: false),
+              KSectionHeading(title: '사용자 정보', onPressed: () {}, showActionButton: false),
               const SizedBox(height: KSizes.spaceBtwItems),
 
               KProfileMenu(
-                title: 'Name',
+                title: '성명',
                 value: controller.user.value.fullName,
-                onPressed: () => Get.to(
-                  () => const KProfileChangeName(),
-                ),
+                onPressed: () => Get.to(() => const KProfileChangeName()),
               ),
-              KProfileMenu(title: 'UserName', value: controller.user.value.userName, onPressed: () {}),
+              KProfileMenu(
+                title: '사용자명',
+                value: controller.user.value.userName,
+                onPressed: () => Get.to(() => const KProfileChangeUsername()),
+              ),
 
               const SizedBox(height: KSizes.spaceBtwItems),
               const Divider(),
               const SizedBox(height: KSizes.spaceBtwItems),
 
-              KSectionHeading(title: 'Personal Information', onPressed: () {}, showActionButton: false),
+              KSectionHeading(title: '개인 정보', onPressed: () {}, showActionButton: false),
               const SizedBox(height: KSizes.spaceBtwItems),
 
-              KProfileMenu(title: 'User ID', value: controller.user.value.id, icon: Iconsax.copy, onPressed: () {}),
-              KProfileMenu(title: 'E-Mail', value: controller.user.value.email, onPressed: () {}),
-              KProfileMenu(title: 'Phone Number', value: controller.user.value.phoneNumber, onPressed: () {}),
-              KProfileMenu(title: 'Gender', value: '남', onPressed: () {}),
-              KProfileMenu(title: 'Date of Birth', value: '1987년 1월 9일', onPressed: () {}),
+              KProfileMenu(
+                title: '사용자 ID',
+                value: controller.user.value.id,
+                icon: Iconsax.copy,
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: controller.user.value.id));
+                  KLoaders.successSnackBar(title: 'ID 복사', message: '복사 되었습니다.');
+                },
+              ),
+              KProfileMenu(
+                title: 'E-Mail',
+                value: controller.user.value.email,
+                icon: Iconsax.copy,
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: controller.user.value.email));
+                  KLoaders.successSnackBar(title: 'E-Mail 복사', message: '복사 되었습니다.');
+                },
+              ),
+              KProfileMenu(
+                title: 'Phone',
+                value: KFormatter.formatPhoneNumber(controller.user.value.phoneNumber),
+                onPressed: () {},
+              ),
+              KProfileMenu(title: '성별', value: '남', onPressed: () {}),
+              KProfileMenu(title: '생년월일', value: '1987년 1월 9일', onPressed: () {}),
 
               const Divider(),
               const SizedBox(height: KSizes.spaceBtwItems),

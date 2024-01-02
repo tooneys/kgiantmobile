@@ -49,7 +49,7 @@ class SettingScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () => Get.put(LogoutController()).SignOut(),
+                      onPressed: () => Get.put(LogoutController()).signOut(),
                       child: const Text('로그아웃'),
                     ),
                   ),
