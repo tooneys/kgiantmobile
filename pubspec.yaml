@@ -35,13 +35,15 @@ dependencies:
 
   # Utility Package
   http: ^1.1.0
-  intl: ^0.19.0
+  intl: ^0.17.0
   logger: ^2.0.2+1
   lottie: ^2.7.0
   url_launcher: ^6.1.12
   connectivity_plus: ^5.0.1
   flutter_native_splash: ^2.3.7
   smooth_page_indicator: ^1.1.0
+  image_picker: ^1.0.5
+  cached_network_image: ^3.3.1
 
   # Icons
   cupertino_icons: ^1.0.2
@@ -53,6 +55,7 @@ dependencies:
   flutter_local_notifications: ^16.2.0
   firebase_auth: ^4.15.3
   cloud_firestore: ^4.13.6
+  firebase_storage: ^11.5.6
 
   # Storage Management
   get: ^4.6.6
@@ -67,6 +70,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   google_sign_in: ^6.2.1
   shimmer: ^3.0.0
+  community_charts_flutter: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -93,6 +97,8 @@ flutter:
     - assets/image/
     - assets/logo/
     - assets/image/user/
+    - assets/image/icon/
+    
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

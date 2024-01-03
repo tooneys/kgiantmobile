@@ -8,7 +8,7 @@ class KRoundedIcon extends StatelessWidget {
     this.width,
     this.height,
     this.size,
-    required this.icon,
+    required this.imageUrl,
     this.applyIconRadius = true,
     this.border,
     this.backgroundColor = KColors.light,
@@ -20,7 +20,7 @@ class KRoundedIcon extends StatelessWidget {
   });
 
   final double? width, height, size;
-  final IconData icon;
+  final String imageUrl;
   final bool applyIconRadius;
   final BoxBorder? border;
   final Color backgroundColor;
@@ -38,17 +38,10 @@ class KRoundedIcon extends StatelessWidget {
         width: width,
         height: height,
         padding: padding,
-        decoration: BoxDecoration(
-            border: border,
-            borderRadius: BorderRadius.circular(borderRadius),
-            color: backgroundColor),
+        decoration: BoxDecoration(border: border, borderRadius: BorderRadius.circular(borderRadius), color: backgroundColor),
         child: ClipRRect(
-          borderRadius: applyIconRadius
-              ? BorderRadius.circular(borderRadius)
-              : BorderRadius.zero,
-          child: Icon(icon, size: size),
-          // 향후 이미지 확보가 되면 변경가능성 있음.
-          //Image(fit: fit, image: isNetworkImage ? NetworkImage(imageUrl) : AssetImage(imageUrl) as ImageProvider),
+          borderRadius: applyIconRadius ? BorderRadius.circular(borderRadius) : BorderRadius.zero,
+          child: Image(fit: fit, image: isNetworkImage ? NetworkImage(imageUrl) : AssetImage(imageUrl) as ImageProvider),
         ),
       ),
     );

@@ -9,13 +9,10 @@ import 'package:kgiantmobile/src/utils/popups/loaders.dart';
 class LogoutController extends GetxController {
   static LogoutController get instance => Get.find();
 
-  final storage = GetStorage();
-
   Future<void> signOut() async {
     try {
       // Start Loading
-      KFullScreenLoader.openLoadingDialog(
-          '잠시만 기다려 주세요...', KImage.loadingAnimation);
+      KFullScreenLoader.openLoadingDialog('잠시만 기다려 주세요...', KImage.loadingAnimation);
 
       // CHeck Internet Connection
       final isConnected = await NetworkManager.instance.isConnected();
@@ -23,9 +20,6 @@ class LogoutController extends GetxController {
         KFullScreenLoader.stopLoading();
         return;
       }
-
-      // storage init
-      storage.erase();
 
       // log out
       await AuthenticationRepository.instance.logout();

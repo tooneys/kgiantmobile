@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kgiantmobile/src/binding/general_binding.dart';
 import 'package:kgiantmobile/src/data/repositories/authentication/auth_repository.dart';
+import 'package:kgiantmobile/src/features/firebasemessaging/screens/fcm_screen.dart';
+import 'package:kgiantmobile/src/features/insight/screens/analysis/sales/daily_analysis.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/theme/theme.dart';
 
@@ -50,6 +52,10 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      getPages: [
+        GetPage(name: '/24DJtTKJqL8EcPpmAsdb', page: () => const DailyAnalysisScreen()),
+        GetPage(name: '/IEVZ9WIpnpuoTDIuUWXI', page: () => App()),
+      ],
     );
   }
 }

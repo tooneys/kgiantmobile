@@ -5,7 +5,7 @@ class KGridLayout extends StatelessWidget {
   const KGridLayout({
     super.key,
     required this.itemCount,
-    this.mainAxisExtent = 288,
+    this.mainAxisExtent = 200,
     required this.itemBuilder,
   });
 

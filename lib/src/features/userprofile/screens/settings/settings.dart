@@ -9,6 +9,7 @@ import 'package:kgiantmobile/src/common/widgets/tile/userprofile_tile.dart';
 import 'package:kgiantmobile/src/features/userprofile/controllers/logout/logout_controller.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/notifications/notification.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/profile/profile.dart';
+import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -24,7 +25,7 @@ class SettingScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const KAppBar(title: Text('사용자 계정'), actions: []),
-                  KUserProfileTile(onPressed: () => Get.to(() => const ProfileScreen())),
+                  KUserProfileTile(image: KImage.user, onPressed: () => Get.to(() => const ProfileScreen())),
                   const SizedBox(height: KSizes.spaceBtwSections),
                 ],
               ),

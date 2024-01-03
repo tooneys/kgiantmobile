@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kgiantmobile/src/common/widgets/appbar/appbar.dart';
 import 'package:kgiantmobile/src/common/widgets/image_text/circular_image_text.dart';
+import 'package:kgiantmobile/src/common/widgets/shimmer/shimmer.dart';
 import 'package:kgiantmobile/src/common/widgets/texts/section_heading.dart';
 import 'package:kgiantmobile/src/features/userprofile/controllers/user_controller.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/profile/change_name.dart';
@@ -24,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: const KAppBar(
         showBackArrow: true,
-        title: Text('Profile'),
+        title: Text('계정'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -36,8 +37,15 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    const KCircularImage(image: KImage.user, width: 80, height: 80),
-                    TextButton(onPressed: () {}, child: const Text('Change Profile Picture')),
+                    Obx(() {
+                      final networkImage = controller.user.value.profilePicture;
+                      final image = networkImage.isNotEmpty ? networkImage : KImage.user;
+
+                      return controller.imageUploading.value
+                          ? const KShimmerEffect(width: 80, height: 80, radius: 80)
+                          : KCircularImage(image: image, width: 80, height: 80, isNetworkImage: networkImage.isNotEmpty);
+                    }),
+                    TextButton(onPressed: () => controller.uploadUserProfilePicture(), child: const Text('Change Profile Picture')),
                   ],
                 ),
               ),

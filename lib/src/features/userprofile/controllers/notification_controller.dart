@@ -40,7 +40,6 @@ class NotificationController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     storageInit();
     super.onInit();
   }
@@ -49,7 +48,6 @@ class NotificationController extends GetxController {
     if (localStorage.read('notifications') != null) {
       listNotification?.add(localStorage.read('notifications'));
       countNotification.value = listNotification!.length;
-      print(listNotification);
     }
   }
 }

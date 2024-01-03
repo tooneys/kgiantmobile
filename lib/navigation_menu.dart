@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kgiantmobile/src/features/firebasemessaging/controllers/fcm_controller.dart';
-import 'package:kgiantmobile/src/features/insight/screens/favorite/favorite.dart';
 import 'package:kgiantmobile/src/features/insight/screens/home/home.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/settings/settings.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
@@ -23,25 +22,21 @@ class NavigationMenu extends StatelessWidget {
           height: 80,
           elevation: 0,
           selectedIndex: controller.selectedIndex.value,
-          onDestinationSelected: (index) =>
-              controller.selectedIndex.value = index,
+          onDestinationSelected: (index) => controller.selectedIndex.value = index,
           backgroundColor: darkMode ? KColors.black : KColors.white,
-          indicatorColor: darkMode
-              ? KColors.white.withOpacity(0.1)
-              : KColors.black.withOpacity(0.1),
+          indicatorColor: darkMode ? KColors.white.withOpacity(0.1) : KColors.black.withOpacity(0.1),
           destinations: const [
             NavigationDestination(icon: Icon(Iconsax.home), label: '홈'),
-            NavigationDestination(icon: Icon(Iconsax.heart), label: '즐겨찾기'),
+            //NavigationDestination(icon: Icon(Iconsax.heart), label: '즐겨찾기'),
             NavigationDestination(icon: Icon(Iconsax.user), label: '사용자'),
           ],
         ),
       ),
       body: FutureBuilder<Object>(
-        future: c.initialize(),
-        builder: (context, snapshot) {
-          return Obx(() => controller.screens[controller.selectedIndex.value]);
-        }
-      ),
+          future: c.initialize(),
+          builder: (context, snapshot) {
+            return Obx(() => controller.screens[controller.selectedIndex.value]);
+          }),
     );
   }
 }
@@ -51,7 +46,7 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
-    const FavoriteScreen(),
+    //const FavoriteScreen(),
     const SettingScreen(),
   ];
 }

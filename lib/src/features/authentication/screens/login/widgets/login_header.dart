@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
+import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
 
 class LoginHeader extends StatelessWidget {
   const LoginHeader({
@@ -9,13 +10,14 @@ class LoginHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = KHelperFunctions.isDarkMode(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Image(
+        Image(
           height: 150,
           // darkmode
-          image: AssetImage(KImage.appLogoImage),
+          image: darkMode ? AssetImage(KImage.appDarkLogoImage) : AssetImage(KImage.appLogoImage),
         ),
         Text(
           '환영합니다',

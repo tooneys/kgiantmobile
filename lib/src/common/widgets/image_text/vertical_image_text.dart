@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kgiantmobile/src/common/widgets/image_text/circular_image_text.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
@@ -6,17 +7,19 @@ import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
 class KVerticalImageText extends StatelessWidget {
   const KVerticalImageText({
     super.key,
-    required this.icon,
+    required this.image,
     required this.title,
     this.textColor = KColors.white,
     this.backgroundColor = KColors.white,
     this.onTap,
+    this.isNetworkImage = true,
   });
 
-  final IconData icon;
+  final String image;
   final String title;
   final Color textColor;
   final Color? backgroundColor;
+  final bool isNetworkImage;
   final void Function()? onTap;
 
   @override
@@ -28,19 +31,13 @@ class KVerticalImageText extends StatelessWidget {
         padding: const EdgeInsets.only(right: KSizes.spaceBtwItems * 1.5),
         child: Column(
           children: [
-            /// Icon
-            Container(
-              width: 56,
-              height: 56,
-              padding: const EdgeInsets.all(KSizes.ss),
-              decoration: BoxDecoration(
-                color: backgroundColor ??
-                    (darkMode ? KColors.black : KColors.white),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Center(
-                child: Icon(icon, size: KSizes.iconLg),
-              ),
+            KCircularImage(
+              image: image,
+              fit: BoxFit.fitWidth,
+              padding: KSizes.ss,
+              isNetworkImage: isNetworkImage,
+              backgroundColor: backgroundColor,
+              overlayColor: darkMode ? KColors.light : KColors.dark,
             ),
             const SizedBox(height: KSizes.spaceBtwItems / 2),
             SizedBox(
@@ -48,10 +45,7 @@ class KVerticalImageText extends StatelessWidget {
               child: Center(
                 child: Text(
                   title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelMedium!
-                      .apply(color: textColor),
+                  style: Theme.of(context).textTheme.labelMedium!.apply(color: textColor),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

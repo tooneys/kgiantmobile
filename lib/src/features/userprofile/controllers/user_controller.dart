@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kgiantmobile/src/data/repositories/authentication/auth_repository.dart';
 import 'package:kgiantmobile/src/data/repositories/user/user_repository.dart';
 import 'package:kgiantmobile/src/features/authentication/models/user_model.dart';
@@ -18,39 +19,41 @@ class UserController extends GetxController {
 
   final profileLoading = false.obs;
   Rx<UserModel> user = UserModel.empty().obs;
-  final userRepository = Get.put(UserRepository());
 
+  final isHidePassword = false.obs;
+  final imageUploading = false.obs;
   final verifyEmail = TextEditingController();
   final verifyPassword = TextEditingController();
-  final isHidePassword = false.obs;
-
+  final userRepository = Get.put(UserRepository());
   GlobalKey<FormState> reAuthFormKey = GlobalKey<FormState>();
 
   final localStorage = GetStorage();
 
   Future<void> saveUserRecord(UserCredential? userCredential) async {
     try {
-      if (userCredential != null) {
-        final isNew = userCredential.additionalUserInfo!.isNewUser;
-        final nameParts = UserModel.nameParts(userCredential.user!.displayName ?? '');
-        final username = UserModel.generateUsername(userCredential.user!.displayName ?? '');
+      //refresh user
+      await fetchUserRecord();
 
-        if (!isNew) return;
+      if (user.value.id.isEmpty) {
+        if (userCredential != null) {
+          final nameParts = UserModel.nameParts(userCredential.user!.displayName ?? '');
+          final username = UserModel.generateUsername(userCredential.user!.displayName ?? '');
 
-        // data
-        final user = UserModel(
-          id: userCredential.user!.uid,
-          firstName: nameParts[0],
-          lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
-          userName: username,
-          email: userCredential.user!.email ?? '',
-          phoneNumber: userCredential.user!.phoneNumber ?? '',
-          profilePicture: userCredential.user!.photoURL ?? '',
-          companyCode: '',
-        );
+          // data
+          final user = UserModel(
+            id: userCredential.user!.uid,
+            firstName: nameParts[0],
+            lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+            userName: username,
+            email: userCredential.user!.email ?? '',
+            phoneNumber: userCredential.user!.phoneNumber ?? '',
+            profilePicture: userCredential.user!.photoURL ?? '',
+            companyCode: '',
+          );
 
-        // save user record
-        await userRepository.saveUserRecord(user);
+          // save user record
+          await userRepository.saveUserRecord(user);
+        }
       }
     } catch (e) {
       KLoaders.warningSnackBar(title: 'Data not saved', message: e.toString());
@@ -97,7 +100,7 @@ class UserController extends GetxController {
   }
 
   /// 계정 삭제
-  void deleteAccount() async {
+  Future<void> deleteAccount() async {
     try {
       KFullScreenLoader.openLoadingDialog('처리중...', KImage.loadingAnimation);
 
@@ -126,6 +129,9 @@ class UserController extends GetxController {
     } catch (e) {
       KFullScreenLoader.stopLoading();
       KLoaders.errorSnackBar(title: 'Oops', message: e.toString());
+    } finally {
+      ///로컬저장소에 계정 패스워드 삭제
+      localStorage.erase();
     }
   }
 
@@ -144,20 +150,39 @@ class UserController extends GetxController {
         return;
       }
 
-      await AuthenticationRepository.instance
-          .reAuthenticateWithEmailAndPassword(verifyEmail.text.trim(), verifyPassword.text.trim());
+      await AuthenticationRepository.instance.reAuthenticateWithEmailAndPassword(verifyEmail.text.trim(), verifyPassword.text.trim());
       await AuthenticationRepository.instance.deleteAccount();
-
-      ///로컬저장소에 계정 패스워드 삭제
-      localStorage.remove('REMEMBER_ME_EMAIL');
-      localStorage.remove('REMEMBER_ME_PASSWORD');
-      localStorage.remove('IsFirstTime');
 
       KFullScreenLoader.stopLoading();
       Get.offAll(() => const LoginScreen());
     } catch (e) {
       KFullScreenLoader.stopLoading();
       KLoaders.errorSnackBar(title: 'Oops', message: e.toString());
+    }
+  }
+
+  // upload profile image
+  uploadUserProfilePicture() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 70, maxWidth: 512, maxHeight: 512);
+      if (image != null) {
+        imageUploading.value = true;
+
+        // upload image
+        final imageUrl = await userRepository.uploadImage('Users/Images/Profile/', image);
+
+        // update
+        Map<String, dynamic> json = {'ProfilePicture': imageUrl};
+        await userRepository.updateSingleField(json);
+
+        user.value.profilePicture = imageUrl;
+        user.refresh();
+        KLoaders.successSnackBar(title: '성공', message: '프로필 사진 업로드 되었습니다.');
+      }
+    } catch (e) {
+      KLoaders.errorSnackBar(title: '에러', message: e.toString());
+    } finally {
+      imageUploading.value = false;
     }
   }
 }

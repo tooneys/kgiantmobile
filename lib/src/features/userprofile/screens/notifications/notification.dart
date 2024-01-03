@@ -36,9 +36,6 @@ class NotificationScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(KSizes.defaultSpace),
           child: Column(
-            // children: [
-            //   KSingleNotification(),
-            // ],
             children: data.map((e) => KSingleNotification(data: e)).toList(),
           ),
         ),

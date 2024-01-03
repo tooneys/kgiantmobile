@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kgiantmobile/src/data/repositories/authentication/auth_repository.dart';
 import 'package:kgiantmobile/src/exceptions/firebase_exceptions.dart';
 import 'package:kgiantmobile/src/exceptions/format_exceptions.dart';
@@ -95,6 +99,24 @@ class UserRepository extends GetxController {
     } catch (e) {
       debugPrint(e.toString());
       throw '[userRecord delete Error] 문제가 발생하였습니다. 잠시후 다시 시도하여 주십시오!';
+    }
+  }
+
+  Future<String> uploadImage(String path, XFile image) async {
+    try {
+      final ref = FirebaseStorage.instance.ref(path).child(image.name);
+      await ref.putFile(File(image.path));
+      final url = await ref.getDownloadURL();
+      return url;
+    } on FirebaseException catch (e) {
+      throw KFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const KFormatException();
+    } on PlatformException catch (e) {
+      throw KPlatformException(e.code).message;
+    } catch (e) {
+      debugPrint(e.toString());
+      throw '[upload image Error] 문제가 발생하였습니다. 잠시후 다시 시도하여 주십시오!';
     }
   }
 }

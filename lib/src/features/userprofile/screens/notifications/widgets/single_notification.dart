@@ -10,14 +10,16 @@ import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
 class KSingleNotification extends StatelessWidget {
   const KSingleNotification({
     super.key,
-    this.data,
+    required this.data,
   });
 
-  final String? data;
+  final String data;
 
   @override
   Widget build(BuildContext context) {
     final darkMode = KHelperFunctions.isDarkMode(context);
+
+    NotificationModel model = NotificationModel.fromJson(jsonDecode(data));
 
     return KRoundedContainer(
       width: double.infinity,
@@ -31,7 +33,7 @@ class KSingleNotification extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Push Notification title',
+              model.title,
               style: Theme.of(context).textTheme.titleLarge,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -40,7 +42,7 @@ class KSingleNotification extends StatelessWidget {
               height: KSizes.ss / 2,
             ),
             Text(
-              'Push Notification body',
+              model.body,
               style: Theme.of(context).textTheme.titleLarge,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -49,7 +51,7 @@ class KSingleNotification extends StatelessWidget {
               height: KSizes.ss / 2,
             ),
             Text(
-              'Push Notification body',
+              model.payload,
               style: Theme.of(context).textTheme.titleLarge,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
