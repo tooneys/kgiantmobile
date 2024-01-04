@@ -70,4 +70,5 @@ class KSizes {
   // Grid view spacing
   static const double gridViewSpacing = 16.0;
 
+  static const double chartSize = 225.0;
 }

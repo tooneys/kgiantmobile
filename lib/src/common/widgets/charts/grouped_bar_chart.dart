@@ -14,6 +14,8 @@
 // limitations under the License.
 
 /// Bar chart example
+library;
+
 // EXCLUDE_FROM_GALLERY_DOCS_START
 import 'dart:math';
 // EXCLUDE_FROM_GALLERY_DOCS_END
@@ -24,7 +26,7 @@ class GroupedBarChart extends StatelessWidget {
   final List<charts.Series<dynamic, String>> seriesList;
   final bool animate;
 
-  GroupedBarChart(this.seriesList, {this.animate = false});
+  const GroupedBarChart(this.seriesList, {super.key, this.animate = false});
 
   factory GroupedBarChart.withSampleData() {
     return GroupedBarChart(
@@ -39,7 +41,17 @@ class GroupedBarChart extends StatelessWidget {
   // It is used for creating random series data to demonstrate animation in
   // the example app only.
   factory GroupedBarChart.withRandomData() {
-    return GroupedBarChart(_createRandomData());
+    return GroupedBarChart(
+      _createRandomData(),
+      animate: true,
+    );
+  }
+
+  factory GroupedBarChart.withRandomData2() {
+    return GroupedBarChart(
+      _createRandomData2(),
+      animate: true,
+    );
   }
 
   /// Create random data.
@@ -47,24 +59,74 @@ class GroupedBarChart extends StatelessWidget {
     final random = Random();
 
     final desktopSalesData = [
-      OrdinalSales('2021', random.nextInt(100)),
-      OrdinalSales('2022', random.nextInt(100)),
-      OrdinalSales('2023', random.nextInt(100)),
-      OrdinalSales('2024', random.nextInt(100)),
+      OrdinalSales('2021', random.nextInt(10000)),
+      OrdinalSales('2022', random.nextInt(10000)),
+      OrdinalSales('2023', random.nextInt(10000)),
+      OrdinalSales('2024', random.nextInt(10000)),
     ];
 
     final tableSalesData = [
-      OrdinalSales('2021', random.nextInt(100)),
-      OrdinalSales('2022', random.nextInt(100)),
-      OrdinalSales('2023', random.nextInt(100)),
-      OrdinalSales('2024', random.nextInt(100)),
+      OrdinalSales('2021', random.nextInt(10000)),
+      OrdinalSales('2022', random.nextInt(10000)),
+      OrdinalSales('2023', random.nextInt(10000)),
+      OrdinalSales('2024', random.nextInt(10000)),
     ];
 
     final mobileSalesData = [
-      OrdinalSales('2021', random.nextInt(100)),
-      OrdinalSales('2022', random.nextInt(100)),
-      OrdinalSales('2023', random.nextInt(100)),
-      OrdinalSales('2024', random.nextInt(100)),
+      OrdinalSales('2021', random.nextInt(10000)),
+      OrdinalSales('2022', random.nextInt(10000)),
+      OrdinalSales('2023', random.nextInt(10000)),
+      OrdinalSales('2024', random.nextInt(10000)),
+    ];
+
+    return [
+      charts.Series<OrdinalSales, String>(
+        id: 'Desktop',
+        domainFn: (OrdinalSales sales, _) => sales.year,
+        measureFn: (OrdinalSales sales, _) => sales.sales,
+        data: desktopSalesData,
+        displayName: '컴퓨터',
+      ),
+      charts.Series<OrdinalSales, String>(
+        id: 'Tablet',
+        domainFn: (OrdinalSales sales, _) => sales.year,
+        measureFn: (OrdinalSales sales, _) => sales.sales,
+        data: tableSalesData,
+        displayName: '태블릿',
+      ),
+      charts.Series<OrdinalSales, String>(
+        id: 'Mobile',
+        domainFn: (OrdinalSales sales, _) => sales.year,
+        measureFn: (OrdinalSales sales, _) => sales.sales,
+        data: mobileSalesData,
+        displayName: '핸드폰',
+      ),
+    ];
+  }
+
+  /// Create random data.
+  static List<charts.Series<OrdinalSales, String>> _createRandomData2() {
+    final random = Random();
+
+    final desktopSalesData = [
+      OrdinalSales('2021', random.nextInt(999999999)),
+      OrdinalSales('2022', random.nextInt(999999999)),
+      OrdinalSales('2023', random.nextInt(999999999)),
+      OrdinalSales('2024', random.nextInt(999999999)),
+    ];
+
+    final tableSalesData = [
+      OrdinalSales('2021', random.nextInt(999999999)),
+      OrdinalSales('2022', random.nextInt(999999999)),
+      OrdinalSales('2023', random.nextInt(999999999)),
+      OrdinalSales('2024', random.nextInt(999999999)),
+    ];
+
+    final mobileSalesData = [
+      OrdinalSales('2021', random.nextInt(999999999)),
+      OrdinalSales('2022', random.nextInt(999999999)),
+      OrdinalSales('2023', random.nextInt(999999999)),
+      OrdinalSales('2024', random.nextInt(999999999)),
     ];
 
     return [

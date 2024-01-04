@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:kgiantmobile/src/common/widgets/image_text/vertical_image_text.dart';
 import 'package:kgiantmobile/src/common/widgets/shimmer/category_shimmer.dart';
 import 'package:kgiantmobile/src/features/insight/controllers/category_controller.dart';
-import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 
 class KHomeCategories extends StatelessWidget {
   const KHomeCategories({

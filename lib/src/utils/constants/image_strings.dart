@@ -2,8 +2,6 @@
 -- App Image String--
  */
 
-import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class KImage {
   /// onboarding Images

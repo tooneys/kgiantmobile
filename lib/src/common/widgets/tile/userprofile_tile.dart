@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:kgiantmobile/src/common/widgets/icons/circular_icon.dart';
 import 'package:kgiantmobile/src/common/widgets/image_text/circular_image_text.dart';
 import 'package:kgiantmobile/src/features/userprofile/controllers/user_controller.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';

@@ -22,12 +22,7 @@ class KProductCardVertical extends StatelessWidget {
     final darkMode = KHelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: () {
-        if (category.id != null) {
-          debugPrint('/${category.id}');
-          Get.toNamed('/${category.id}');
-        }
-      },
+      onTap: () => Get.toNamed('/${category.id}'),
       child: Container(
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
@@ -47,6 +42,7 @@ class KProductCardVertical extends StatelessWidget {
                 imageUrl: category.image,
                 applyIconRadius: true,
                 size: 90,
+                isNetworkImage: true,
               ),
             ),
             const SizedBox(

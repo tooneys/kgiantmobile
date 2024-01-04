@@ -13,8 +13,6 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = KHelperFunctions.isDarkMode(context);
-
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(

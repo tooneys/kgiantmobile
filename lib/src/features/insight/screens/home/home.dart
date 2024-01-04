@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kgiantmobile/src/common/widgets/custom_shape/containers/primary_header_container.dart';
-import 'package:kgiantmobile/src/common/widgets/custom_shape/containers/search_container.dart';
 import 'package:kgiantmobile/src/common/widgets/layouts/grid_layout.dart';
 import 'package:kgiantmobile/src/common/widgets/menu/menu_card_vetical.dart';
 import 'package:kgiantmobile/src/common/widgets/shimmer/category_shimmer.dart';
@@ -10,7 +9,6 @@ import 'package:kgiantmobile/src/features/insight/controllers/category_controlle
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 
 import 'widgets/home_appbar.dart';
-import 'widgets/home_categories.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -75,7 +73,14 @@ class HomeScreen extends StatelessWidget {
                       itemCount: categoryController.featureCategories.length,
                       mainAxisExtent: 150,
                       itemBuilder: (_, index) {
-                        if (categoryController.isLoading.value) return const KCategoryShimmer();
+                        if (categoryController.isLoading.value) {
+                          return KCategoryShimmer(
+                            width: 150,
+                            imageHeight: 200,
+                            textHeight: 20,
+                            itemCount: categoryController.featureCategories.length,
+                          );
+                        }
 
                         if (categoryController.featureCategories.isEmpty) {
                           return Center(child: Text('No Data Found', style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white)));

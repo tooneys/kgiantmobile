@@ -22,8 +22,7 @@ class RegisterConditionCheck extends StatelessWidget {
           child: Obx(
             () => Checkbox(
               value: controller.privacyPolicy.value,
-              onChanged: (value) => controller.privacyPolicy.value =
-                  !controller.privacyPolicy.value,
+              onChanged: (value) => controller.privacyPolicy.value = !controller.privacyPolicy.value,
             ),
           ),
         ),
@@ -33,19 +32,7 @@ class RegisterConditionCheck extends StatelessWidget {
           //     text: 'I agree to ',
           //     style: Theme.of(context).textTheme.bodySmall),
           TextSpan(
-            text: '개인정보를 수집',
-            style: Theme.of(context).textTheme.bodyMedium!.apply(
-                  color: dark ? KColors.white : KColors.primary,
-                  decoration: TextDecoration.underline,
-                  decorationColor: dark ? KColors.white : KColors.primary,
-                ),
-          ),
-          TextSpan(
-            text: ', ',
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-          TextSpan(
-            text: '이용 ',
+            text: '개인정보를 수집 및 이용',
             style: Theme.of(context).textTheme.bodyMedium!.apply(
                   color: dark ? KColors.white : KColors.primary,
                   decoration: TextDecoration.underline,

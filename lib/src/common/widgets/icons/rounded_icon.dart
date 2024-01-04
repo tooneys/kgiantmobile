@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:kgiantmobile/src/common/widgets/shimmer/shimmer.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 
@@ -41,7 +43,14 @@ class KRoundedIcon extends StatelessWidget {
         decoration: BoxDecoration(border: border, borderRadius: BorderRadius.circular(borderRadius), color: backgroundColor),
         child: ClipRRect(
           borderRadius: applyIconRadius ? BorderRadius.circular(borderRadius) : BorderRadius.zero,
-          child: Image(fit: fit, image: isNetworkImage ? NetworkImage(imageUrl) : AssetImage(imageUrl) as ImageProvider),
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  fit: fit,
+                  imageUrl: imageUrl,
+                  progressIndicatorBuilder: (context, url, progress) => const KShimmerEffect(width: 64, height: 64),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                )
+              : Image(fit: fit, image: isNetworkImage ? NetworkImage(imageUrl) : AssetImage(imageUrl) as ImageProvider),
         ),
       ),
     );

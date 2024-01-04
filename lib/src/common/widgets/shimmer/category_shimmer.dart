@@ -6,9 +6,14 @@ class KCategoryShimmer extends StatelessWidget {
   const KCategoryShimmer({
     super.key,
     this.itemCount = 6,
+    this.width = 55,
+    this.imageHeight = 55,
+    this.radius = 55,
+    this.textHeight = 8,
   });
 
   final int itemCount;
+  final double width, imageHeight, radius, textHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +25,12 @@ class KCategoryShimmer extends StatelessWidget {
         itemCount: itemCount,
         separatorBuilder: (_, __) => const SizedBox(width: KSizes.spaceBtwItems),
         itemBuilder: (_, __) {
-          return const Column(
+          return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              KShimmerEffect(width: 55, height: 55, radius: 55),
-              SizedBox(height: KSizes.spaceBtwItems / 2),
-              KShimmerEffect(width: 55, height: 8),
+              KShimmerEffect(width: width, height: imageHeight, radius: radius),
+              const SizedBox(height: KSizes.spaceBtwItems / 2),
+              KShimmerEffect(width: width, height: textHeight),
             ],
           );
         },

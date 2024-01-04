@@ -17,7 +17,7 @@ class LoginHeader extends StatelessWidget {
         Image(
           height: 150,
           // darkmode
-          image: darkMode ? AssetImage(KImage.appDarkLogoImage) : AssetImage(KImage.appLogoImage),
+          image: darkMode ? const AssetImage(KImage.appDarkLogoImage) : const AssetImage(KImage.appLogoImage),
         ),
         Text(
           '환영합니다',
