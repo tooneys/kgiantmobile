@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:kgiantmobile/src/features/firebasemessaging/models/notification_model.dart';
 
 class NotificationController extends GetxController {
   static NotificationController get instance => Get.find();
@@ -13,7 +14,10 @@ class NotificationController extends GetxController {
 
   Future<void> saveStorage(Map<String, dynamic> data) async {
     try {
-      final notificationJson = jsonEncode(data);
+      //final notificationJson = jsonEncode(data);
+      print('saveStorage : $data');
+      final notificationJson = NotificationModel(title: data["title"], body: data["body"], payload: data["payload"]).toJson();
+
       listNotification!.add(notificationJson);
 
       /// 로컬스토리지에 리스트 저장
@@ -27,6 +31,7 @@ class NotificationController extends GetxController {
 
   Future<void> clearStorage() async {
     await localStorage.remove('notifications');
+    listNotification?.clear();
     countNotification.value = 0;
   }
 

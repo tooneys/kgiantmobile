@@ -34,8 +34,16 @@ class NotificationScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(KSizes.defaultSpace),
-          child: Column(
-            children: controller.listNotification!.map((e) => KSingleNotification(data: e.toString())).toList(),
+          child: Obx(
+            () {
+              if (controller.countNotification.value != 0) {
+                return Column(
+                  children: controller.listNotification!.map((e) => KSingleNotification(data: e.toString())).toList(),
+                );
+              } else {
+                return const Center(child: Text('No Data Found'));
+              }
+            },
           ),
         ),
       ),

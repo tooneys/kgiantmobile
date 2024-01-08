@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kgiantmobile/src/features/firebasemessaging/controllers/fcm_controller.dart';
 import 'package:kgiantmobile/src/features/insight/screens/home/home.dart';
+import 'package:kgiantmobile/src/features/insight/screens/search/search_information.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/settings/settings.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
@@ -27,7 +28,7 @@ class NavigationMenu extends StatelessWidget {
           indicatorColor: darkMode ? KColors.white.withOpacity(0.1) : KColors.black.withOpacity(0.1),
           destinations: const [
             NavigationDestination(icon: Icon(Iconsax.home), label: '홈'),
-            //NavigationDestination(icon: Icon(Iconsax.heart), label: '즐겨찾기'),
+            NavigationDestination(icon: Icon(Iconsax.search_normal), label: '제품검색'),
             NavigationDestination(icon: Icon(Iconsax.user), label: '사용자'),
           ],
         ),
@@ -46,7 +47,7 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
-    //const FavoriteScreen(),
+    const SearchInfomationScreen(),
     const SettingScreen(),
   ];
 }
