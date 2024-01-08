@@ -13,13 +13,13 @@ class KSingleNotification extends StatelessWidget {
     required this.data,
   });
 
-  final String data;
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
     final darkMode = KHelperFunctions.isDarkMode(context);
 
-    NotificationModel model = NotificationModel.fromJson(jsonDecode(data));
+    NotificationModel model = NotificationModel.fromJson(data);
 
     return KRoundedContainer(
       width: double.infinity,

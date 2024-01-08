@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -16,7 +14,11 @@ class NotificationController extends GetxController {
     try {
       //final notificationJson = jsonEncode(data);
       print('saveStorage : $data');
-      final notificationJson = NotificationModel(title: data["title"], body: data["body"], payload: data["payload"]).toJson();
+      final notificationJson = NotificationModel(
+        title: data["title"] ?? '',
+        body: data["body"] ?? '',
+        payload: data["payload"] ?? '',
+      ).toJson();
 
       listNotification!.add(notificationJson);
 
