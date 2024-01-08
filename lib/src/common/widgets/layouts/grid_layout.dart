@@ -20,7 +20,7 @@ class KGridLayout extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 3,
         mainAxisSpacing: KSizes.gridViewSpacing,
         crossAxisSpacing: KSizes.gridViewSpacing,
         mainAxisExtent: mainAxisExtent,

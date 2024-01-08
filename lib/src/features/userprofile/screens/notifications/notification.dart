@@ -12,8 +12,7 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NotificationController());
-    final data = controller.readStorage();
+    final controller = NotificationController.instance;
 
     return Scaffold(
       appBar: KAppBar(
@@ -36,7 +35,7 @@ class NotificationScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(KSizes.defaultSpace),
           child: Column(
-            children: data.map((e) => KSingleNotification(data: e)).toList(),
+            children: controller.listNotification!.map((e) => KSingleNotification(data: e.toString())).toList(),
           ),
         ),
       ),

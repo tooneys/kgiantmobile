@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:kgiantmobile/src/features/userprofile/controllers/notification_controller.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 
 class KNotiCountIcon extends StatelessWidget {
@@ -9,15 +7,15 @@ class KNotiCountIcon extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.iconColor,
+    required this.count,
   });
 
   final VoidCallback onPressed;
   final Color iconColor;
+  final int count;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NotificationController());
-
     return Stack(
       children: [
         IconButton(
@@ -27,25 +25,19 @@ class KNotiCountIcon extends StatelessWidget {
             color: iconColor,
           ),
         ),
-        Obx(
-          () {
-            debugPrint('controller count : ${controller.countNotification.value}');
-
-            return Positioned(
-              right: 0,
-              child: Container(
-                width: controller.countNotification.value == 0 ? 0 : 18,
-                height: controller.countNotification.value == 0 ? 0 : 18,
-                decoration: BoxDecoration(color: Colors.red.withOpacity(0.5), borderRadius: BorderRadius.circular(100)),
-                child: Center(
-                  child: Text(
-                    '${controller.countNotification.value}',
-                    style: Theme.of(context).textTheme.labelLarge!.apply(color: KColors.white, fontSizeFactor: 0.8),
-                  ),
-                ),
+        Positioned(
+          right: 0,
+          child: Container(
+            width: count == 0 ? 0 : 18,
+            height: count == 0 ? 0 : 18,
+            decoration: BoxDecoration(color: Colors.red.withOpacity(0.5), borderRadius: BorderRadius.circular(100)),
+            child: Center(
+              child: Text(
+                '$count',
+                style: Theme.of(context).textTheme.labelLarge!.apply(color: KColors.white, fontSizeFactor: 0.8),
               ),
-            );
-          },
+            ),
+          ),
         ),
       ],
     );

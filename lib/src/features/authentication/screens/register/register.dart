@@ -4,7 +4,6 @@ import 'package:kgiantmobile/src/common/widgets/form_divider.dart';
 import 'package:kgiantmobile/src/common/widgets/social_buttons.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 import 'package:kgiantmobile/src/utils/constants/text_strings.dart';
-import 'package:kgiantmobile/src/utils/helper_function/helper_function.dart';
 
 import 'widgets/register_form.dart';
 

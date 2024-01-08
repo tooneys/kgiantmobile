@@ -9,11 +9,11 @@ class NotificationController extends GetxController {
 
   final localStorage = GetStorage();
   final countNotification = 0.obs;
-  late List<dynamic>? listNotification = [];
+  late List<dynamic>? listNotification = [].obs;
 
   Future<void> saveStorage(Map<String, dynamic> data) async {
     try {
-      String notificationJson = jsonEncode(data);
+      final notificationJson = jsonEncode(data);
       listNotification!.add(notificationJson);
 
       /// 로컬스토리지에 리스트 저장
@@ -27,7 +27,7 @@ class NotificationController extends GetxController {
 
   Future<void> clearStorage() async {
     await localStorage.remove('notifications');
-    countNotification.value = listNotification!.length;
+    countNotification.value = 0;
   }
 
   List<dynamic> readStorage() {
@@ -45,9 +45,7 @@ class NotificationController extends GetxController {
   }
 
   void storageInit() {
-    if (localStorage.read('notifications') != null) {
-      listNotification?.add(localStorage.read('notifications'));
-      countNotification.value = listNotification!.length;
-    }
+    listNotification = readStorage();
+    countNotification.value = listNotification!.length;
   }
 }
