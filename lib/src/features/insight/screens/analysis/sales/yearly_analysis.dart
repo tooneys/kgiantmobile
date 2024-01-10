@@ -14,48 +14,50 @@ class YearlyAnalysisScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(SalesSummaryController());
 
-    return Scaffold(
-      appBar: const KAppBar(
-        title: Text('연간 판매 분석'),
-        showBackArrow: true,
-        actions: [],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(KSizes.defaultSpace),
-        child: Column(
-          children: [
-            KSectionHeading(
-              title: '수량 집계',
-              onPressed: () => Get.to(
-                () => AnalysisGridScreen(
-                  title: '연간 판매 분석 (수량집계)',
-                  dataSource: controller.salesQtyAnalysisDataSource,
-                  columns: controller.yearlyColumn,
+    return SafeArea(
+      child: Scaffold(
+        appBar: const KAppBar(
+          title: Text('연간 판매 분석'),
+          showBackArrow: true,
+          actions: [],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(KSizes.defaultSpace),
+          child: Column(
+            children: [
+              KSectionHeading(
+                title: '수량 집계',
+                onPressed: () => Get.to(
+                  () => AnalysisGridScreen(
+                    title: '연간 판매 분석 (수량집계)',
+                    dataSource: controller.salesQtyAnalysisDataSource,
+                    columns: controller.yearlyColumn,
+                  ),
                 ),
+                showActionButton: true,
+                buttonTitle: '집계현황',
               ),
-              showActionButton: true,
-              buttonTitle: '집계현황',
-            ),
-            const SizedBox(height: KSizes.spaceBtwItems),
-            Expanded(child: GroupedBarChart.withRandomData()),
-            const SizedBox(height: KSizes.spaceBtwItems),
-            const Divider(),
-            const SizedBox(height: KSizes.spaceBtwItems),
-            KSectionHeading(
-              title: '금액 집계',
-              onPressed: () => Get.to(
-                () => AnalysisGridScreen(
-                  title: '연간 판매 분석 (금액집계)',
-                  dataSource: controller.salesAmtAnalysisDataSource,
-                  columns: controller.yearlyColumn,
+              const SizedBox(height: KSizes.spaceBtwItems),
+              Expanded(child: GroupedBarChart.withRandomData()),
+              const SizedBox(height: KSizes.spaceBtwItems),
+              const Divider(),
+              const SizedBox(height: KSizes.spaceBtwItems),
+              KSectionHeading(
+                title: '금액 집계',
+                onPressed: () => Get.to(
+                  () => AnalysisGridScreen(
+                    title: '연간 판매 분석 (금액집계)',
+                    dataSource: controller.salesAmtAnalysisDataSource,
+                    columns: controller.yearlyColumn,
+                  ),
                 ),
+                showActionButton: true,
+                buttonTitle: '집계현황',
               ),
-              showActionButton: true,
-              buttonTitle: '집계현황',
-            ),
-            const SizedBox(height: KSizes.spaceBtwItems),
-            Expanded(child: GroupedBarChart.withRandomData2()),
-          ],
+              const SizedBox(height: KSizes.spaceBtwItems),
+              Expanded(child: GroupedBarChart.withRandomData2()),
+            ],
+          ),
         ),
       ),
     );

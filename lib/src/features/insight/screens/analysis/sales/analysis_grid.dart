@@ -17,14 +17,16 @@ class AnalysisGridScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: KAppBar(
-        title: Text(title),
-        showBackArrow: true,
-      ),
-      body: DataGridScreen(
-        source: dataSource,
-        columns: columns,
+    return SafeArea(
+      child: Scaffold(
+        appBar: KAppBar(
+          title: Text(title),
+          showBackArrow: true,
+        ),
+        body: DataGridScreen(
+          source: dataSource,
+          columns: columns,
+        ),
       ),
     );
   }
