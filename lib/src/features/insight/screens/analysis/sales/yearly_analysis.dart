@@ -25,6 +25,7 @@ class YearlyAnalysisScreen extends StatelessWidget {
           padding: const EdgeInsets.all(KSizes.defaultSpace),
           child: Column(
             children: [
+              /// 수량집계 그래프 및 그리드
               KSectionHeading(
                 title: '수량 집계',
                 onPressed: () => Get.to(
@@ -38,10 +39,19 @@ class YearlyAnalysisScreen extends StatelessWidget {
                 buttonTitle: '집계현황',
               ),
               const SizedBox(height: KSizes.spaceBtwItems),
-              Expanded(child: GroupedBarChart.withRandomData()),
+              Expanded(
+                child: GroupedBarChart(
+                  controller.yearlyChartQty,
+                  animate: true,
+                ),
+              ),
+
+              /// 경계선
               const SizedBox(height: KSizes.spaceBtwItems),
               const Divider(),
               const SizedBox(height: KSizes.spaceBtwItems),
+
+              /// 금액집계 그래프 및 그리드
               KSectionHeading(
                 title: '금액 집계',
                 onPressed: () => Get.to(
@@ -55,7 +65,12 @@ class YearlyAnalysisScreen extends StatelessWidget {
                 buttonTitle: '집계현황',
               ),
               const SizedBox(height: KSizes.spaceBtwItems),
-              Expanded(child: GroupedBarChart.withRandomData2()),
+              Expanded(
+                child: GroupedBarChart(
+                  controller.yearlyChartQty,
+                  animate: true,
+                ),
+              ),
             ],
           ),
         ),

@@ -25,7 +25,7 @@ class MonthlySummaryModel {
     };
   }
 
-  /// Map Json oriented document snapshot from Firebase to UserModel
+  /// Map Json oriented document snapshot from Firebase
   factory MonthlySummaryModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
