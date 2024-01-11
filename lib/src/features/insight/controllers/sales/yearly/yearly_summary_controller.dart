@@ -33,9 +33,7 @@ class SalesSummaryController extends GetxController {
     final query = await fireStore.collection('yearly_items_quantity').orderBy('year').get();
 
     Map<String, int> chartDataMap = {};
-
     query.docs.forEach((e) {
-      //print("${e.data()['year']} : ${e.data()['order']}");
       chartDataMap.update(e.data()['year'].toString(), (value) => value + (e.data()['order']) as int,
           ifAbsent: () => (e.data()['order']) as int);
     });
@@ -47,17 +45,15 @@ class SalesSummaryController extends GetxController {
             ))
         .toList();
 
-    final chartSeries = chartData.map((data) {
-      return charts.Series<yearlyChartSumData, String>(
+    return [
+      charts.Series<yearlyChartSumData, String>(
         id: 'yearly',
         domainFn: (yearlyChartSumData sales, _) => sales.year,
         measureFn: (yearlyChartSumData sales, _) => sales.sum,
-        data: [data],
+        data: chartData,
         displayName: '판매량',
-      );
-    }).toList();
-
-    return chartSeries;
+      )
+    ];
   }
 
   // get grid Data
