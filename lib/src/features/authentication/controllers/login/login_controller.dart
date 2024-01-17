@@ -44,8 +44,7 @@ class LoginController extends GetxController {
       }
 
       // login user using Email & password Authentication
-      final userCredentials =
-          await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
+      final userCredentials = await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
 
       // Remove Loader
       KFullScreenLoader.stopLoading();

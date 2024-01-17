@@ -7,11 +7,13 @@ import 'package:intl/intl.dart';
 var numberFormat = NumberFormat("###,###,###");
 
 class SalesAnalysisQtyModel {
-  SalesAnalysisQtyModel(this.year,
-      this.itemName,
-      this.order,
-      this.delivery,
-      this.ret,);
+  SalesAnalysisQtyModel(
+    this.year,
+    this.itemName,
+    this.order,
+    this.delivery,
+    this.ret,
+  );
 
   final String year;
   final String itemName;
@@ -19,42 +21,28 @@ class SalesAnalysisQtyModel {
   final int delivery;
   final int ret;
 
-  static SalesAnalysisQtyModel empty() =>
-      SalesAnalysisQtyModel(
-          '',
-          '',
-          0,
-          0,
-          0
-      );
+  static SalesAnalysisQtyModel empty() => SalesAnalysisQtyModel('', '', 0, 0, 0);
 
   factory SalesAnalysisQtyModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
-      return SalesAnalysisQtyModel(
-          data['year'].toString() ?? '',
-          data['item'] ?? '',
-          data['order'] ?? 0,
-          data['delivery'] ?? 0,
-          data['return'] ?? 0);
+      return SalesAnalysisQtyModel(data['year'].toString() ?? '', data['item'] ?? '', data['order'] ?? 0, data['delivery'] ?? 0, data['return'] ?? 0);
     } else {
       return SalesAnalysisQtyModel.empty();
     }
   }
 }
 
-
 class SalesQtyAnalysisDataSource extends DataGridSource {
   SalesQtyAnalysisDataSource({required List<SalesAnalysisQtyModel> listData}) {
     _data = listData
-        .map((e) =>
-        DataGridRow(cells: [
-          DataGridCell<String>(columnName: 'year', value: e.year),
-          DataGridCell<String>(columnName: 'itemName', value: e.itemName),
-          DataGridCell<int>(columnName: 'order', value: e.order),
-          DataGridCell<int>(columnName: 'delivery', value: e.delivery),
-          DataGridCell<int>(columnName: 'ret', value: e.ret),
-        ]))
+        .map((e) => DataGridRow(cells: [
+              DataGridCell<String>(columnName: 'year', value: e.year),
+              DataGridCell<String>(columnName: 'itemName', value: e.itemName),
+              DataGridCell<int>(columnName: 'order', value: e.order),
+              DataGridCell<int>(columnName: 'delivery', value: e.delivery),
+              DataGridCell<int>(columnName: 'ret', value: e.ret),
+            ]))
         .toList();
   }
 
@@ -67,12 +55,12 @@ class SalesQtyAnalysisDataSource extends DataGridSource {
   DataGridRowAdapter? buildRow(DataGridRow row) {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((e) {
-          return Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(KSizes.spaceBtwItems),
-            child: Text(e.value.toString()),
-          );
-        }).toList());
+      return Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(KSizes.spaceBtwItems),
+        child: Text(e.value.toString()),
+      );
+    }).toList());
   }
 
   @override
@@ -81,5 +69,28 @@ class SalesQtyAnalysisDataSource extends DataGridSource {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
       child: Text(summaryValue),
     );
+  }
+}
+
+class YearlyChartSumData {
+  String year;
+  int sum;
+
+  YearlyChartSumData(this.year, this.sum);
+
+  static YearlyChartSumData empty() {
+    return YearlyChartSumData('', 0);
+  }
+
+  factory YearlyChartSumData.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+    if (document.data() != null) {
+      final data = document.data()!;
+      return YearlyChartSumData(
+        data['year'].toString(),
+        data['order'] ?? 0,
+      );
+    } else {
+      return YearlyChartSumData.empty();
+    }
   }
 }

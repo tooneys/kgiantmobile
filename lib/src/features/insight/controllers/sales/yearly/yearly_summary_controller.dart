@@ -1,78 +1,63 @@
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:kgiantmobile/src/data/repositories/sales_summary/summary_repository.dart';
 import 'package:kgiantmobile/src/features/insight/models/analysis/sales_analysis_amt_model.dart';
 import 'package:kgiantmobile/src/features/insight/models/analysis/sales_analysis_qty_model.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
-import 'package:community_charts_flutter/community_charts_flutter.dart' as charts;
 
 class SalesSummaryController extends GetxController {
   static SalesSummaryController get instance => Get.find();
 
+  @override
+  void onReady() async {
+    /// grid
+    getSalesAnalysisColumn();
+
+    /// get data
+    await getGridQtyData();
+    await getGridAmtData();
+
+    /// chart
+    yearlyChartData = await getChartData();
+
+    super.onReady();
+  }
+
+  final analysisRepository = Get.put(SummaryRepository());
+
+  /// 차트 데이터
+  List<YearlyChartSumData> yearlyChartData = [];
+
   /// 그리드 컬럼
   List<GridColumn> yearlyColumn = <GridColumn>[];
+  List<SalesAnalysisQtyModel> salesAnalysisQtyModel = <SalesAnalysisQtyModel>[];
+  List<SalesAnalysisAmtModel> salesAnalysisAmtModel = <SalesAnalysisAmtModel>[];
 
-  /// 수량 데이터
-  List<charts.Series<yearlyChartSumData, String>> yearlyChartQty = [];
-  List<SalesAnalysisQtyModel> yearlyQty = <SalesAnalysisQtyModel>[];
-  late SalesQtyAnalysisDataSource salesQtyAnalysisDataSource;
+  getGridQtyData() async {
+    salesAnalysisQtyModel = await analysisRepository.getAllYearlyItemsQty();
+  }
 
-  /// 금액 데이터
-  List<SalesAnalysisAmtModel> yearlyAmt = <SalesAnalysisAmtModel>[];
-  late SalesAmtAnalysisDataSource salesAmtAnalysisDataSource;
+  getGridAmtData() async {
+    salesAnalysisAmtModel = await analysisRepository.getAllYearlyItemsAmt();
+  }
 
-  /// 변수
-  final fireStore = FirebaseFirestore.instance;
-
-  // get chart Data
-  Future<List<charts.Series<yearlyChartSumData, String>>> getChartData() async {
-    final query = await fireStore.collection('yearly_items_quantity').orderBy('year').get();
-
+  Future<List<YearlyChartSumData>> getChartData() async {
     Map<String, int> chartDataMap = {};
-    query.docs.forEach((e) {
-      chartDataMap.update(e.data()['year'].toString(), (value) => value + (e.data()['order']) as int,
-          ifAbsent: () => (e.data()['order']) as int);
-    });
+    for (var e in salesAnalysisQtyModel) {
+      chartDataMap.update(e.year, (value) => value + e.order, ifAbsent: () => e.order);
+    }
 
-    List<yearlyChartSumData> chartData = chartDataMap.entries
-        .map((entry) => yearlyChartSumData(
-              year: entry.key,
-              sum: entry.value,
-            ))
-        .toList();
-
-    return [
-      charts.Series<yearlyChartSumData, String>(
-        id: 'yearly',
-        domainFn: (yearlyChartSumData sales, _) => sales.year,
-        measureFn: (yearlyChartSumData sales, _) => sales.sum,
-        data: chartData,
-        displayName: '판매량',
-      )
-    ];
+    return Future<List<YearlyChartSumData>>.value(
+        chartDataMap.entries.map((entry) => YearlyChartSumData(entry.key, entry.value)).toList());
   }
 
-  // get grid Data
-  Future<List<SalesAnalysisQtyModel>> getSalesAnalysisQty() async {
-    final query = await fireStore.collection('yearly_items_quantity').orderBy('year').orderBy('item').get();
+  get salesQtyAnalysisDataSource => SalesQtyAnalysisDataSource(listData: salesAnalysisQtyModel);
 
-    List<SalesAnalysisQtyModel> result = query.docs.map((doc) => SalesAnalysisQtyModel.fromSnapshot(doc)).toList();
-    return result;
-  }
-
-  // get Data
-  Future<List<SalesAnalysisAmtModel>> getSalesAnalysisAmt() async {
-    final query = await fireStore.collection('yearly_items_amount').orderBy('year').orderBy('item').get();
-    List<SalesAnalysisAmtModel> result = query.docs.map((doc) => SalesAnalysisAmtModel.fromSnapshot(doc)).toList();
-    return result;
-  }
+  get salesAmtAnalysisDataSource => SalesAmtAnalysisDataSource(listData: salesAnalysisAmtModel);
 
   getSalesAnalysisColumn() {
-    return <GridColumn>[
+    yearlyColumn = <GridColumn>[
       GridColumn(
         columnName: 'year',
         label: Container(
@@ -130,37 +115,4 @@ class SalesSummaryController extends GetxController {
       ),
     ];
   }
-
-  @override
-  void onInit() {
-    salesQtySummary();
-    salesAmtSummary();
-    super.onInit();
-  }
-
-  Future<void> salesQtySummary() async {
-    yearlyChartQty = await getChartData();
-    yearlyQty = await getSalesAnalysisQty();
-    yearlyColumn = getSalesAnalysisColumn();
-
-    salesQtyAnalysisDataSource = SalesQtyAnalysisDataSource(listData: yearlyQty);
-    //그룹
-    //salesQtyAnalysisDataSource.addColumnGroup(ColumnGroup(name: 'year', sortGroupRows: true));
-  }
-
-  Future<void> salesAmtSummary() async {
-    yearlyAmt = await getSalesAnalysisAmt();
-    yearlyColumn = getSalesAnalysisColumn();
-
-    salesAmtAnalysisDataSource = SalesAmtAnalysisDataSource(listData: yearlyAmt);
-    //그룹
-    //salesAmtAnalysisDataSource.addColumnGroup(ColumnGroup(name: 'year', sortGroupRows: true));
-  }
-}
-
-class yearlyChartSumData {
-  String year;
-  int sum;
-
-  yearlyChartSumData({required this.year, required this.sum});
 }

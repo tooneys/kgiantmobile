@@ -8,7 +8,7 @@ import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MonthlyAnalysisScreen extends StatelessWidget {
-  const MonthlyAnalysisScreen({super.key});
+  MonthlyAnalysisScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
