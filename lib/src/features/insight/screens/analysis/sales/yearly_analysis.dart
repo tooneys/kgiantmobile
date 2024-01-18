@@ -8,7 +8,6 @@ import 'package:kgiantmobile/src/features/insight/controllers/sales/yearly/yearl
 import 'package:kgiantmobile/src/features/insight/models/analysis/sales_analysis_qty_model.dart';
 import 'package:kgiantmobile/src/features/insight/models/sales/mothly_summary_model.dart';
 import 'package:kgiantmobile/src/features/insight/screens/analysis/sales/analysis_grid.dart';
-import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -45,18 +44,32 @@ class YearlyAnalysisScreen extends StatelessWidget {
                 buttonTitle: '집계현황',
               ),
               const SizedBox(height: KSizes.spaceBtwItems),
-              KSfCatesianChart(
-                series: [
-                  LineSeries<YearlyChartSumData, String>(
-                    enableTooltip: true,
-                    dataSource: controller.yearlyChartData,
-                    xValueMapper: (YearlyChartSumData value, _) => value.year,
-                    yValueMapper: (YearlyChartSumData value, _) => value.sum,
-                    dataLabelSettings: const DataLabelSettings(isVisible: true),
-                  ),
-                ],
-                title: '',
-                isLegendVisible: false,
+              Obx(
+                () {
+                  List<YearlyChartSumData> dataSource = controller.yearlyChartData.value;
+
+                  if (dataSource.isEmpty) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.deepPurple,
+                      ),
+                    );
+                  }
+
+                  return KSfCatesianChart(
+                    series: [
+                      LineSeries<YearlyChartSumData, String>(
+                        enableTooltip: true,
+                        dataSource: dataSource,
+                        xValueMapper: (YearlyChartSumData value, _) => value.year.toString(),
+                        yValueMapper: (YearlyChartSumData value, _) => value.sum,
+                        dataLabelSettings: const DataLabelSettings(isVisible: true),
+                      ),
+                    ],
+                    title: '',
+                    isLegendVisible: false,
+                  );
+                },
               ),
 
               /// 경계선
