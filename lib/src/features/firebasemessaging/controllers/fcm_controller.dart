@@ -57,8 +57,7 @@ class AppController extends GetxController {
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(androidNotificationChannel);
 
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
 
     void onDidReceiveLocalNotification(int id, String? title, String? body, String? payload) async {
       // display a dialog with the notification details, tap ok to go to another page
@@ -82,15 +81,14 @@ class AppController extends GetxController {
       onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
     );
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage rm) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage rm) async {
       message.value = rm;
       RemoteNotification? notification = rm.notification;
       AndroidNotification? android = rm.notification?.android;
 
       if (notification != null && android != null) {
-
         /// local Storage message save
-        notificationController.saveStorage({
+        await notificationController.saveStorage({
           'title': notification.title,
           'body': notification.body,
           'payload': rm.data['argument'],

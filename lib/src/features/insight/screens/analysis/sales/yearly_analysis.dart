@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kgiantmobile/src/common/widgets/appbar/appbar.dart';
 import 'package:kgiantmobile/src/common/widgets/charts/syncfusion_bar_chart.dart';
+import 'package:kgiantmobile/src/common/widgets/shimmer/shimmer.dart';
 import 'package:kgiantmobile/src/common/widgets/texts/section_heading.dart';
 import 'package:kgiantmobile/src/features/insight/controllers/sales/monthly/mothly_summary_controller.dart';
 import 'package:kgiantmobile/src/features/insight/controllers/sales/yearly/yearly_summary_controller.dart';
@@ -49,10 +50,9 @@ class YearlyAnalysisScreen extends StatelessWidget {
                   List<YearlyChartSumData> dataSource = controller.yearlyChartData.value;
 
                   if (dataSource.isEmpty) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.deepPurple,
-                      ),
+                    return const KShimmerEffect(
+                      width: double.infinity,
+                      height: KSizes.chartSize,
                     );
                   }
 
