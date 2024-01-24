@@ -81,14 +81,16 @@ class AppController extends GetxController {
       onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
     );
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage rm) async {
+    FirebaseMessaging.onMessage.listen((RemoteMessage rm) {
       message.value = rm;
       RemoteNotification? notification = rm.notification;
       AndroidNotification? android = rm.notification?.android;
 
       if (notification != null && android != null) {
+        print('title is : ${notification.title}');
+
         /// local Storage message save
-        await notificationController.saveStorage({
+        notificationController.saveStorage({
           'title': notification.title,
           'body': notification.body,
           'payload': rm.data['argument'],

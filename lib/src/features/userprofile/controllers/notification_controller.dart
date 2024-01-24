@@ -10,6 +10,25 @@ class NotificationController extends GetxController {
   final countNotification = 0.obs;
   RxList<dynamic> listNotification = [].obs;
 
+  @override
+  void onInit() {
+    storageInit();
+    super.onInit();
+  }
+
+  void storageInit() {
+    listNotification.value = readStorage();
+    countNotification.value = listNotification.length;
+  }
+
+  List<dynamic> readStorage() {
+    try {
+      return localStorage.read('notifications');
+    } catch (e) {
+      return [];
+    }
+  }
+
   Future<void> saveStorage(Map<String, dynamic> data) async {
     try {
       //final notificationJson = jsonEncode(data);
@@ -25,7 +44,7 @@ class NotificationController extends GetxController {
       /// 로컬스토리지에 리스트 저장
       await localStorage.write('notifications', listNotification);
 
-      countNotification.value = listNotification!.length;
+      countNotification.value = listNotification.length;
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -35,24 +54,5 @@ class NotificationController extends GetxController {
     await localStorage.remove('notifications');
     listNotification.clear();
     countNotification.value = 0;
-  }
-
-  List<dynamic> readStorage() {
-    try {
-      return localStorage.read('notifications');
-    } catch (e) {
-      return [];
-    }
-  }
-
-  @override
-  void onInit() {
-    storageInit();
-    super.onInit();
-  }
-
-  void storageInit() {
-    listNotification.value = readStorage();
-    countNotification.value = listNotification.length;
   }
 }
