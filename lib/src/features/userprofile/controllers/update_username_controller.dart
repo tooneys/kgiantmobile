@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:kgiantmobile/src/data/repositories/user/user_repository.dart';
 import 'package:kgiantmobile/src/features/userprofile/controllers/user_controller.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/profile/profile.dart';
+import 'package:kgiantmobile/src/features/userprofile/screens/settings/settings.dart';
 import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/network_manager/network_manager.dart';
 import 'package:kgiantmobile/src/utils/popups/full_screen_loader.dart';
@@ -18,7 +19,6 @@ class UpdateUsernameController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     initializeName();
     super.onInit();
   }
@@ -26,7 +26,6 @@ class UpdateUsernameController extends GetxController {
   Future<void> initializeName() async {
     userName.text = userController.user.value.userName;
   }
-
 
   Future<void> updateUserName() async {
     try {

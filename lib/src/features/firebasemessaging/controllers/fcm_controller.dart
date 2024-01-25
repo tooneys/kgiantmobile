@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:kgiantmobile/src/data/repositories/user/user_repository.dart';
 import 'package:kgiantmobile/src/features/firebasemessaging/screens/notification_screen.dart';
 import 'package:kgiantmobile/src/features/userprofile/controllers/notification_controller.dart';
 
@@ -12,12 +13,20 @@ class AppController extends GetxController {
   final Rxn<RemoteMessage> message = Rxn<RemoteMessage>();
   final localStorage = GetStorage();
   final notificationController = Get.put(NotificationController());
+  final userRepository = Get.put(UserRepository());
 
   Future<bool> initialize() async {
     // Firebase 초기화부터 해야 Firebase Messaging 을 사용할 수 있다.
     // await Firebase.initializeApp(
     //   options: DefaultFirebaseOptions.currentPlatform,
     // );
+
+    /// topic 구독
+    final user = await userRepository.fetchUserDetails();
+    FirebaseMessaging.instance.subscribeToTopic('all');
+    if (user.companyCode.isNotEmpty) {
+      FirebaseMessaging.instance.subscribeToTopic(user.companyCode);
+    }
 
     // Token 생성
     String? token = await FirebaseMessaging.instance.getToken();
@@ -87,8 +96,6 @@ class AppController extends GetxController {
       AndroidNotification? android = rm.notification?.android;
 
       if (notification != null && android != null) {
-        print('title is : ${notification.title}');
-
         /// local Storage message save
         notificationController.saveStorage({
           'title': notification.title,

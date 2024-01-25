@@ -22,7 +22,8 @@ class SalesSummaryController extends GetxController {
     await getGridAmtData();
 
     /// chart
-    await getChartData();
+    await getChartQtyData();
+    await getChartAmtData();
 
     /// grid
     getSalesAnalysisColumn();
@@ -31,7 +32,8 @@ class SalesSummaryController extends GetxController {
   final analysisRepository = Get.put(SummaryRepository());
 
   /// 차트 데이터
-  RxList<YearlyChartSumData> yearlyChartData = <YearlyChartSumData>[].obs;
+  RxList<YearlyChartSumData> yearlyChartQtyData = <YearlyChartSumData>[].obs;
+  RxList<YearlyChartSumData> yearlyChartAmtData = <YearlyChartSumData>[].obs;
 
   /// 그리드 컬럼
   List<GridColumn> yearlyColumn = <GridColumn>[];
@@ -41,7 +43,7 @@ class SalesSummaryController extends GetxController {
   Future<void> getGridQtyData() async => salesAnalysisQtyModel = await analysisRepository.getAllYearlyItemsQty();
   Future<void> getGridAmtData() async => salesAnalysisAmtModel = await analysisRepository.getAllYearlyItemsAmt();
 
-  Future<void> getChartData() async {
+  Future<void> getChartQtyData() async {
     try {
       KFullScreenLoader.openLoadingDialog('처리중...', KImage.loadingAnimation);
 
@@ -56,7 +58,32 @@ class SalesSummaryController extends GetxController {
         chartDataMap.update(e.year, (value) => value + e.order, ifAbsent: () => e.order);
       }
 
-      yearlyChartData.assignAll(chartDataMap.entries.map((entry) => YearlyChartSumData(entry.key, entry.value)).toList());
+      yearlyChartQtyData.assignAll(chartDataMap.entries.map((entry) => YearlyChartSumData(entry.key, entry.value)).toList());
+
+      KFullScreenLoader.stopLoading();
+      //KLoaders.successSnackBar(title: 'Success', message: '집계 데이터를 가져왔습니다.!');
+    } catch (e) {
+      KFullScreenLoader.stopLoading();
+      KLoaders.errorSnackBar(title: 'Error', message: e.toString());
+    }
+  }
+
+  Future<void> getChartAmtData() async {
+    try {
+      KFullScreenLoader.openLoadingDialog('처리중...', KImage.loadingAnimation);
+
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        KFullScreenLoader.stopLoading();
+        return;
+      }
+
+      Map<String, int> chartDataMap = {};
+      for (var e in salesAnalysisAmtModel) {
+        chartDataMap.update(e.year, (value) => value + e.order, ifAbsent: () => e.order);
+      }
+
+      yearlyChartAmtData.assignAll(chartDataMap.entries.map((entry) => YearlyChartSumData(entry.key, entry.value)).toList());
 
       KFullScreenLoader.stopLoading();
       //KLoaders.successSnackBar(title: 'Success', message: '집계 데이터를 가져왔습니다.!');

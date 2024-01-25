@@ -47,7 +47,7 @@ class YearlyAnalysisScreen extends StatelessWidget {
               const SizedBox(height: KSizes.spaceBtwItems),
               Obx(
                 () {
-                  List<YearlyChartSumData> dataSource = controller.yearlyChartData.value;
+                  List<YearlyChartSumData> dataSource = controller.yearlyChartQtyData.value;
 
                   if (dataSource.isEmpty) {
                     return const KShimmerEffect(
@@ -91,17 +91,31 @@ class YearlyAnalysisScreen extends StatelessWidget {
                 buttonTitle: '집계현황',
               ),
               const SizedBox(height: KSizes.spaceBtwItems),
-              KSfCatesianChart(
-                series: mController.products.map((product) {
-                  return LineSeries<MonthlySummaryModel, String>(
-                    dataSource: product,
-                    xValueMapper: (MonthlySummaryModel sales, _) => sales.month,
-                    yValueMapper: (MonthlySummaryModel sales, _) => sales.qty,
-                    name: product[0].product,
-                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+              Obx(
+                () {
+                  List<YearlyChartSumData> dataSource = controller.yearlyChartAmtData.value;
+
+                  if (dataSource.isEmpty) {
+                    return const KShimmerEffect(
+                      width: double.infinity,
+                      height: KSizes.chartSize,
+                    );
+                  }
+
+                  return KSfCatesianChart(
+                    series: [
+                      LineSeries<YearlyChartSumData, String>(
+                        enableTooltip: true,
+                        dataSource: dataSource,
+                        xValueMapper: (YearlyChartSumData value, _) => value.year.toString(),
+                        yValueMapper: (YearlyChartSumData value, _) => value.sum,
+                        dataLabelSettings: const DataLabelSettings(isVisible: true),
+                      ),
+                    ],
+                    title: '',
+                    isLegendVisible: false,
                   );
-                }).toList(),
-                title: '',
+                },
               ),
             ],
           ),

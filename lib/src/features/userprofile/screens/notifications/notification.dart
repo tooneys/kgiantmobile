@@ -38,7 +38,7 @@ class NotificationScreen extends StatelessWidget {
             () {
               if (controller.countNotification.value != 0) {
                 return Column(
-                  children: controller.listNotification!.map((jsonData) => KSingleNotification(data: jsonData)).toList(),
+                  children: controller.listNotification.map((jsonData) => KSingleNotification(data: jsonData)).toList(),
                 );
               } else {
                 return const Center(child: Text('No Data Found'));

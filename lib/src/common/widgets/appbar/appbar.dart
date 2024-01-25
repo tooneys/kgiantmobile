@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:kgiantmobile/src/features/userprofile/screens/settings/settings.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 import 'package:kgiantmobile/src/utils/device/device_utility.dart';
