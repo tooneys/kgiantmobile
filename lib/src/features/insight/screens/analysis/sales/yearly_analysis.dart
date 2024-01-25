@@ -4,21 +4,18 @@ import 'package:kgiantmobile/src/common/widgets/appbar/appbar.dart';
 import 'package:kgiantmobile/src/common/widgets/charts/syncfusion_bar_chart.dart';
 import 'package:kgiantmobile/src/common/widgets/shimmer/shimmer.dart';
 import 'package:kgiantmobile/src/common/widgets/texts/section_heading.dart';
-import 'package:kgiantmobile/src/features/insight/controllers/sales/monthly/mothly_summary_controller.dart';
 import 'package:kgiantmobile/src/features/insight/controllers/sales/yearly/yearly_summary_controller.dart';
 import 'package:kgiantmobile/src/features/insight/models/analysis/sales_analysis_qty_model.dart';
-import 'package:kgiantmobile/src/features/insight/models/sales/mothly_summary_model.dart';
 import 'package:kgiantmobile/src/features/insight/screens/analysis/sales/analysis_grid.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class YearlyAnalysisScreen extends StatelessWidget {
-  YearlyAnalysisScreen({super.key});
+  const YearlyAnalysisScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SalesSummaryController());
-    final mController = Get.put(MonthlySummaryController());
 
     return SafeArea(
       child: Scaffold(
@@ -30,6 +27,7 @@ class YearlyAnalysisScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(KSizes.defaultSpace),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               /// 수량집계 그래프 및 그리드
               KSectionHeading(

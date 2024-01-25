@@ -9,6 +9,7 @@ import 'package:kgiantmobile/src/common/widgets/tile/userprofile_tile.dart';
 import 'package:kgiantmobile/src/features/userprofile/controllers/logout/logout_controller.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/notifications/notification.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/profile/profile.dart';
+import 'package:kgiantmobile/src/features/userprofile/screens/security/personalsecurity.dart';
 import 'package:kgiantmobile/src/utils/constants/colors.dart';
 import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
@@ -51,6 +52,12 @@ class SettingScreen extends StatelessWidget {
                     subTitle: '',
                     icon: Iconsax.notification,
                     onTap: () => Get.to(() => const NotificationScreen()),
+                  ),
+                  KSettingsMenuTile(
+                    title: '개인정보취급방침',
+                    subTitle: '',
+                    icon: Iconsax.personalcard,
+                    onTap: () => Get.to(() => const PersonalSecurity()),
                   ),
                   const SizedBox(height: KSizes.spaceBtwSections),
                   SizedBox(

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:kgiantmobile/src/data/repositories/user/user_repository.dart';
 import 'package:kgiantmobile/src/features/userprofile/controllers/user_controller.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/profile/profile.dart';
-import 'package:kgiantmobile/src/features/userprofile/screens/settings/settings.dart';
 import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/network_manager/network_manager.dart';
 import 'package:kgiantmobile/src/utils/popups/full_screen_loader.dart';

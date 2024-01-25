@@ -4,7 +4,7 @@ class KColors {
   KColors._();
 
   // App Basic Colors
-  static const Color primary = Colors.deepPurple;
+  static const Color primary = Colors.deepOrange;
   static const Color secondary = Color(0xFFFFE24B);
   static const Color accent = Color(0xFFb0c7ff);
 

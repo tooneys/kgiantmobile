@@ -74,6 +74,7 @@ dependencies:
   syncfusion_flutter_datagrid: ^24.1.44
   syncfusion_flutter_charts: ^24.1.41
   flutter_barcode_scanner: ^2.0.0
+  flutter_inappwebview: ^5.7.2+3
 
 dev_dependencies:
   flutter_test:

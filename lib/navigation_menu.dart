@@ -34,10 +34,11 @@ class NavigationMenu extends StatelessWidget {
         ),
       ),
       body: FutureBuilder<Object>(
-          future: c.initialize(),
-          builder: (context, snapshot) {
-            return Obx(() => controller.screens[controller.selectedIndex.value]);
-          }),
+        future: c.initialize(),
+        builder: (context, snapshot) {
+          return Obx(() => controller.screens[controller.selectedIndex.value]);
+        },
+      ),
     );
   }
 }

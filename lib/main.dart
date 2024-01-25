@@ -54,8 +54,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       getPages: [
-        GetPage(name: '/24DJtTKJqL8EcPpmAsdb', page: () => YearlyAnalysisScreen()),
-        GetPage(name: '/IEVZ9WIpnpuoTDIuUWXI', page: () => MonthlyAnalysisScreen()),
+        GetPage(name: '/24DJtTKJqL8EcPpmAsdb', page: () => const YearlyAnalysisScreen()),
+        GetPage(name: '/IEVZ9WIpnpuoTDIuUWXI', page: () => const MonthlyAnalysisScreen()),
         GetPage(name: '/hnkxZyxE2eWSicV65wIx', page: () => App()),
       ],
     );
