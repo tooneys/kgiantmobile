@@ -43,9 +43,7 @@ class AuthenticationRepository extends GetxController {
     } else {
       //local storage
       deviceStorage.writeIfNull('IsFirstTime', true);
-      deviceStorage.read('IsFirstTime') != true
-          ? Get.offAll(() => const LoginScreen())
-          : Get.offAll(() => const OnBoardingScreen());
+      deviceStorage.read('IsFirstTime') != true ? Get.offAll(() => const LoginScreen()) : Get.offAll(() => const OnBoardingScreen());
     }
   }
 
@@ -143,12 +141,15 @@ class AuthenticationRepository extends GetxController {
   /// google Login
   Future<UserCredential?> signInWithGoogle() async {
     try {
+      print('1');
       //trigger the auth flow
       final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
+      print('2');
       // Obtain the auth details from request
       final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
 
+      print('3');
       // Create new credential
       final credentials = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,

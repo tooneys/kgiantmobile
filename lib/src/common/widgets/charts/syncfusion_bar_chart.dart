@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+// ignore: must_be_immutable
 class KSfCatesianChart extends StatelessWidget {
   KSfCatesianChart({
     super.key,
