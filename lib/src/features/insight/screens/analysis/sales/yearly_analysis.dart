@@ -45,6 +45,7 @@ class YearlyAnalysisScreen extends StatelessWidget {
               const SizedBox(height: KSizes.spaceBtwItems),
               Obx(
                 () {
+                  // ignore: invalid_use_of_protected_member
                   List<YearlyChartSumData> dataSource = controller.yearlyChartQtyData.value;
 
                   if (dataSource.isEmpty) {
@@ -91,6 +92,7 @@ class YearlyAnalysisScreen extends StatelessWidget {
               const SizedBox(height: KSizes.spaceBtwItems),
               Obx(
                 () {
+                  // ignore: invalid_use_of_protected_member
                   List<YearlyChartSumData> dataSource = controller.yearlyChartAmtData.value;
 
                   if (dataSource.isEmpty) {

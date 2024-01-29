@@ -26,7 +26,13 @@ class SalesAnalysisQtyModel {
   factory SalesAnalysisQtyModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
-      return SalesAnalysisQtyModel(data['year'].toString() ?? '', data['item'] ?? '', data['order'] ?? 0, data['delivery'] ?? 0, data['return'] ?? 0);
+      return SalesAnalysisQtyModel(
+        data['year'].toString(),
+        data['item'] ?? '',
+        data['order'] ?? 0,
+        data['delivery'] ?? 0,
+        data['return'] ?? 0,
+      );
     } else {
       return SalesAnalysisQtyModel.empty();
     }

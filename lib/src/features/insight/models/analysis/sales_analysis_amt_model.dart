@@ -18,24 +18,18 @@ class SalesAnalysisAmtModel {
   final int delivery;
   final int ret;
 
-  static SalesAnalysisAmtModel empty() =>
-      SalesAnalysisAmtModel(
-          '',
-          '',
-          0,
-          0,
-          0
-      );
+  static SalesAnalysisAmtModel empty() => SalesAnalysisAmtModel('', '', 0, 0, 0);
 
   factory SalesAnalysisAmtModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
       return SalesAnalysisAmtModel(
-          data['year'].toString() ?? '',
-          data['item'] ?? '',
-          data['order'] ?? 0,
-          data['delivery'] ?? 0,
-          data['return'] ?? 0);
+        data['year'].toString(),
+        data['item'] ?? '',
+        data['order'] ?? 0,
+        data['delivery'] ?? 0,
+        data['return'] ?? 0,
+      );
     } else {
       return SalesAnalysisAmtModel.empty();
     }

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1017462574047",
+    "firebase_url": "https://kgiantmobile-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "kgiantmobile",
     "storage_bucket": "kgiantmobile.appspot.com"
   },
@@ -21,6 +22,42 @@
             "certificate_hash": "af20d83568e75beaae46769bbf480cacd244487a"
           }
         },
+        {
+          "client_id": "1017462574047-c9c84rnc2sisi0qlhgdklojgbkt2b5v1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACcGwwnkjtCeaB5DRhJG7DkQvr2z7Wftk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017462574047-c9c84rnc2sisi0qlhgdklojgbkt2b5v1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1017462574047-dgosqnhqqbb6lo4kv8c6g0c9tlo5cp5r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kgiantmobile.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017462574047:android:2dcba4e5d85caaaf25526a",
+        "android_client_info": {
+          "package_name": "com.kgiant.mobileinsight"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "1017462574047-c9c84rnc2sisi0qlhgdklojgbkt2b5v1.apps.googleusercontent.com",
           "client_type": 3

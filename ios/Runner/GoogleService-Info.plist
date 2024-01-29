@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1017462574047-qks8s39886ehahm9dl8e0arkffeh2ee1.apps.googleusercontent.com</string>
+	<string>1017462574047-4jmkiaua6b71b6qlclq0bnsjo873ev9c.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1017462574047-qks8s39886ehahm9dl8e0arkffeh2ee1</string>
+	<string>com.googleusercontent.apps.1017462574047-4jmkiaua6b71b6qlclq0bnsjo873ev9c</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>1017462574047-5ug9913hlgl6v5kufqlv3smgbqfu7dis.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.kgiantmobile</string>
+	<string>com.kgiant.mobileinsight</string>
 	<key>PROJECT_ID</key>
 	<string>kgiantmobile</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,10 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1017462574047:ios:3e46f4685c39a88725526a</string>
-	<key>GIDClientID</key>
-    <!-- TODO Replace this value: -->
-    <!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
-    <string>1017462574047-qks8s39886ehahm9dl8e0arkffeh2ee1.apps.googleusercontent.com</string>
+	<string>1:1017462574047:ios:3c6956bc07de80e225526a</string>
+	<key>DATABASE_URL</key>
+	<string>https://kgiantmobile-default-rtdb.asia-southeast1.firebasedatabase.app</string>
 </dict>
 </plist>
