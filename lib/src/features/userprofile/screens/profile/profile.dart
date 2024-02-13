@@ -8,6 +8,7 @@ import 'package:kgiantmobile/src/common/widgets/shimmer/shimmer.dart';
 import 'package:kgiantmobile/src/common/widgets/texts/section_heading.dart';
 import 'package:kgiantmobile/src/features/userprofile/controllers/user_controller.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/profile/change_name.dart';
+import 'package:kgiantmobile/src/features/userprofile/screens/profile/change_phonenumber.dart';
 import 'package:kgiantmobile/src/features/userprofile/screens/profile/change_username.dart';
 import 'package:kgiantmobile/src/utils/constants/image_strings.dart';
 import 'package:kgiantmobile/src/utils/constants/sizes.dart';
@@ -99,10 +100,10 @@ class ProfileScreen extends StatelessWidget {
                 KProfileMenu(
                   title: 'Phone',
                   value: KFormatter.formatPhoneNumber(controller.user.value.phoneNumber),
-                  onPressed: () {},
+                  onPressed: () => Get.to(() => const KProfileChangePhoneNumber()),
                 ),
-                KProfileMenu(title: '성별', value: '남', onPressed: () {}),
-                KProfileMenu(title: '생년월일', value: '1987년 1월 9일', onPressed: () {}),
+                //KProfileMenu(title: '성별', value: '남', onPressed: () {}),
+                //KProfileMenu(title: '생년월일', value: '1999년 9월 9일', onPressed: () {}),
 
                 const Divider(),
                 const SizedBox(height: KSizes.spaceBtwItems),

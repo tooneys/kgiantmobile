@@ -46,7 +46,7 @@ class KValidator {
 
   static String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
-      return '핸드폰ㅇ번호를 입력해 주세요.';
+      return '핸드폰번호를 입력해 주세요.';
     }
 
     final phoneRegExp = RegExp(r'^\d{11}$');

@@ -28,7 +28,9 @@ class LoginForm extends StatelessWidget {
               decoration: const InputDecoration(
                 prefixIcon: Icon(Iconsax.direct_right),
                 labelText: 'E-Mail',
+
               ),
+              keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: KSizes.spaceBtwInputFields),
 
@@ -49,6 +51,7 @@ class LoginForm extends StatelessWidget {
                           ? Iconsax.eye_slash
                           : Iconsax.eye)),
                 ),
+                keyboardType: TextInputType.visiblePassword,
               ),
             ),
             const SizedBox(height: KSizes.spaceBtwInputFields / 2),

@@ -38,26 +38,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'KgiantMobile',
-      theme: KAppTheme.lightTheme,
-      darkTheme: KAppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      debugShowCheckedModeBanner: false,
-      initialBinding: GeneralBindings(),
-      home: const Scaffold(
-        backgroundColor: KColors.primary,
-        body: Center(
-          child: CircularProgressIndicator(
-            color: Colors.white,
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: GetMaterialApp(
+        title: 'KgiantMobile',
+        theme: KAppTheme.lightTheme,
+        darkTheme: KAppTheme.darkTheme,
+        themeMode: ThemeMode.system,
+        debugShowCheckedModeBanner: false,
+        initialBinding: GeneralBindings(),
+        home: const Scaffold(
+          backgroundColor: KColors.primary,
+          body: Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
           ),
         ),
+        getPages: [
+          GetPage(name: '/24DJtTKJqL8EcPpmAsdb', page: () => const YearlyAnalysisScreen()),
+          GetPage(name: '/IEVZ9WIpnpuoTDIuUWXI', page: () => const MonthlyAnalysisScreen()),
+          GetPage(name: '/hnkxZyxE2eWSicV65wIx', page: () => App()),
+        ],
       ),
-      getPages: [
-        GetPage(name: '/24DJtTKJqL8EcPpmAsdb', page: () => const YearlyAnalysisScreen()),
-        GetPage(name: '/IEVZ9WIpnpuoTDIuUWXI', page: () => const MonthlyAnalysisScreen()),
-        GetPage(name: '/hnkxZyxE2eWSicV65wIx', page: () => App()),
-      ],
     );
   }
 }

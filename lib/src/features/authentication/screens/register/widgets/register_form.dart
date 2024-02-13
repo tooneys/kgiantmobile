@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kgiantmobile/src/features/authentication/controllers/register/register_controller.dart';
@@ -30,6 +31,7 @@ class RegisterForm extends StatelessWidget {
                   validator: (value) => KValidator.validateEmptyText(KTexts.firstName, value),
                   expands: false,
                   decoration: const InputDecoration(labelText: KTexts.firstName, prefixIcon: Icon(Iconsax.user)),
+                  keyboardType: TextInputType.name,
                 ),
               ),
               const SizedBox(width: KSizes.spaceBtwInputFields),
@@ -41,6 +43,7 @@ class RegisterForm extends StatelessWidget {
                   validator: (value) => KValidator.validateEmptyText(KTexts.lastName, value),
                   expands: false,
                   decoration: const InputDecoration(labelText: KTexts.lastName, prefixIcon: Icon(Iconsax.user_edit)),
+                  keyboardType: TextInputType.name,
                 ),
               ),
             ],
@@ -53,6 +56,7 @@ class RegisterForm extends StatelessWidget {
             validator: (value) => KValidator.validateEmptyText(KTexts.userName, value),
             expands: false,
             decoration: const InputDecoration(labelText: KTexts.userName, prefixIcon: Icon(Iconsax.user_edit)),
+            keyboardType: TextInputType.name,
           ),
           const SizedBox(height: KSizes.spaceBtwInputFields),
 
@@ -61,6 +65,7 @@ class RegisterForm extends StatelessWidget {
             validator: (value) => KValidator.validateEmail(value),
             expands: false,
             decoration: const InputDecoration(labelText: KTexts.email, prefixIcon: Icon(Iconsax.direct)),
+            keyboardType: TextInputType.emailAddress,
           ),
           const SizedBox(height: KSizes.spaceBtwInputFields),
 
@@ -69,6 +74,7 @@ class RegisterForm extends StatelessWidget {
             validator: (value) => KValidator.validatePhoneNumber(value),
             expands: false,
             decoration: const InputDecoration(labelText: KTexts.phoneNo, prefixIcon: Icon(Iconsax.call)),
+            keyboardType: TextInputType.phone,
           ),
           const SizedBox(height: KSizes.spaceBtwInputFields),
 
@@ -85,6 +91,7 @@ class RegisterForm extends StatelessWidget {
                   icon: controller.hidePassword.value ? const Icon(Iconsax.eye_slash) : const Icon(Iconsax.eye),
                 ),
               ),
+              keyboardType: TextInputType.visiblePassword,
             ),
           ),
           const SizedBox(height: KSizes.spaceBtwInputFields),

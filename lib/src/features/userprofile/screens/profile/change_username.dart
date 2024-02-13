@@ -34,6 +34,7 @@ class KProfileChangeUsername extends StatelessWidget {
                 validator: (value) => KValidator.validateEmptyText('유저 ID', value),
                 expands: false,
                 decoration: const InputDecoration(labelText: '유저 ID', prefixIcon: Icon(Iconsax.user_edit)),
+                keyboardType: TextInputType.name,
               ),
             ),
             const SizedBox(height: KSizes.spaceBtwSections),
@@ -41,7 +42,7 @@ class KProfileChangeUsername extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => controller.updateUserName(),
-                child: const Text('저장'),
+                child: const Text('변경'),
               ),
             ),
           ],
