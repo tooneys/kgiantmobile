@@ -45,8 +45,8 @@ class UpdatePhoneNoController extends GetxController {
         return;
       }
 
-      Map<String, dynamic> name = {'PhoneNumber': phoneNo.text.trim()};
-      await userRepository.updateSingleField(name);
+      Map<String, dynamic> data = {'PhoneNumber': phoneNo.text.trim()};
+      await userRepository.updateSingleField(data);
 
       /// userController 에 휴대폰번호 변경
       /// error 이미 초기화 되었다 ?
